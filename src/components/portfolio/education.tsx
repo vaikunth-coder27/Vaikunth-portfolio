@@ -26,7 +26,7 @@ export function Education() {
   ]
 
   return (
-    <section id="education" className="relative py-32 px-6 bg-black">
+    <section id="education" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}

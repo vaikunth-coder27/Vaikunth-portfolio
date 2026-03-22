@@ -22,9 +22,10 @@ export function Hero() {
 
       <Spotlight className="-top-40 left-0 md:left-40 md:-top-20" fill="white" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full flex items-center min-h-screen pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-5 w-full flex items-center min-h-screen pt-20 pb-28 md:pt-24 md:pb-12">
         {/* Left — intro content */}
-        <div className="flex-1 flex flex-col gap-6 z-10">
+        <div className="flex-1 flex flex-col items-center md:items-start gap-5 z-10 text-center md:text-left">
+
           {/* Available badge */}
           <motion.div {...fadeUp(0.1)}>
             <span className="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-1.5 text-xs text-neutral-400 bg-white/5 backdrop-blur-sm font-mono tracking-widest uppercase">
@@ -37,14 +38,14 @@ export function Hero() {
           <div className="flex flex-col gap-0 leading-none">
             <motion.h1
               {...fadeUp(0.2)}
-              className="text-[clamp(4rem,10vw,8.5rem)] font-serif italic font-semibold text-white leading-[0.9] tracking-tight"
+              className="text-[clamp(3.2rem,12vw,8.5rem)] font-serif italic font-semibold text-white leading-[0.9] tracking-tight"
               style={{ fontFamily: 'var(--font-cormorant)' }}
             >
               Vaikunth
             </motion.h1>
             <motion.h1
               {...fadeUp(0.3)}
-              className="text-[clamp(4rem,10vw,8.5rem)] font-serif italic font-semibold leading-[0.9] tracking-tight"
+              className="text-[clamp(3.2rem,12vw,8.5rem)] font-serif italic font-semibold leading-[0.9] tracking-tight"
               style={{
                 fontFamily: 'var(--font-cormorant)',
                 background: 'linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #818cf8 100%)',
@@ -57,46 +58,52 @@ export function Hero() {
             </motion.h1>
           </div>
 
-          {/* Title — clean sans */}
+          {/* Title — clean mono, wraps gracefully on mobile */}
           <motion.p
             {...fadeUp(0.4)}
-            className="text-base font-mono text-neutral-500 tracking-[0.2em] uppercase"
+            className="text-xs md:text-sm font-mono text-neutral-500 tracking-[0.15em] uppercase leading-relaxed"
           >
-            AI Researcher &nbsp;·&nbsp; ML Engineer &nbsp;·&nbsp; NLP Specialist
+            AI Researcher &nbsp;·&nbsp; ML Engineer
+            <br className="sm:hidden" />
+            <span className="hidden sm:inline"> &nbsp;·&nbsp; </span>
+            NLP Specialist
           </motion.p>
 
           {/* Tagline — italic serif */}
           <motion.p
             {...fadeUp(0.5)}
-            className="text-[1.35rem] font-serif italic text-neutral-400 max-w-md leading-relaxed"
+            className="text-lg md:text-[1.35rem] font-serif italic text-neutral-400 max-w-xs md:max-w-md leading-relaxed"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Building intelligent systems that understand language, see the world,
             and reason like humans.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div {...fadeUp(0.6)} className="flex gap-4 mt-2">
+          {/* CTAs — stacked on mobile, row on sm+ */}
+          <motion.div {...fadeUp(0.6)} className="flex flex-col sm:flex-row gap-3 mt-1 w-full sm:w-auto">
             <a
               href="#projects"
-              className="px-7 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors tracking-wide"
+              className="flex items-center justify-center min-h-[48px] px-7 rounded-full bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors tracking-wide"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="px-7 py-3 rounded-full border border-white/20 text-white text-sm font-light hover:bg-white/8 transition-colors tracking-wide"
+              className="flex items-center justify-center min-h-[48px] px-7 rounded-full border border-white/20 text-white text-sm font-light hover:bg-white/8 transition-colors tracking-wide"
             >
               Get in Touch
             </a>
           </motion.div>
 
-          {/* Stats row */}
-          <motion.div {...fadeUp(0.7)} className="flex gap-8 mt-4 pt-6 border-t border-white/8">
+          {/* Stats row — 2×2 grid on mobile, single row on md+ */}
+          <motion.div
+            {...fadeUp(0.7)}
+            className="grid grid-cols-2 gap-x-8 gap-y-4 md:flex md:gap-8 mt-2 pt-6 border-t border-white/8 w-full"
+          >
             {[
               { value: '82%', label: 'MSc Distinction' },
               { value: '9.5', label: 'BE CGPA / 10' },
-              { value: '6+', label: 'AI Projects' },
+              { value: '6+',  label: 'AI Projects' },
               { value: '20+', label: 'Technologies' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col gap-0.5">
@@ -114,7 +121,7 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right — 3D Spline robot */}
+        {/* Right — 3D Spline robot (desktop only) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -133,7 +140,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-24 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-xs text-neutral-600 font-mono tracking-widest uppercase">Scroll</span>
         <div className="w-px h-10 bg-gradient-to-b from-neutral-600 to-transparent" />

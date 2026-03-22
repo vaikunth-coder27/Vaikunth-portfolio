@@ -30,7 +30,7 @@ export function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="relative py-32 px-6 bg-black">
+    <section id="about" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
       {/* Section label */}
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>

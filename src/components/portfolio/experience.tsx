@@ -12,7 +12,7 @@ export function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="experience" className="relative py-32 px-6 bg-black">
+    <section id="experience" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
