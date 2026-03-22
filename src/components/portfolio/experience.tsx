@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 
 const amazonTags = ['LLMs', 'CodeBLEU', 'Few-Shot Learning', '8-bit Quantization', 'NLP', 'Python', 'Privacy AI']
@@ -57,7 +58,7 @@ export function Experience() {
                 {/* ZOT wordmark */}
                 <div className="flex items-center gap-3 mb-2">
                   <a href="https://www.zot.co.uk/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden hover:border-white/20 transition-colors flex-shrink-0">
-                    <img src="/logo_zot.ico" alt="ZOT" className="w-7 h-7 object-contain" />
+                    <Image src="/logo_zot.ico" alt="ZOT" width={28} height={28} className="w-7 h-7 object-contain" unoptimized />
                   </a>
                   <div>
                     <a href="https://www.zot.co.uk/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5">
@@ -160,7 +161,7 @@ export function Experience() {
                 {/* Amazon wordmark */}
                 <div className="flex items-center gap-3 mb-2">
                   <a href="https://www.amazon.co.uk/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-[#FF9900]/10 border border-[#FF9900]/20 flex items-center justify-center overflow-hidden hover:border-[#FF9900]/40 transition-colors flex-shrink-0">
-                    <img src="/amazon.ico" alt="Amazon" className="w-7 h-7 object-contain" />
+                    <Image src="/amazon.ico" alt="Amazon" width={28} height={28} className="w-7 h-7 object-contain" unoptimized />
                   </a>
                   <div>
                     <a href="https://www.amazon.co.uk/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5">
