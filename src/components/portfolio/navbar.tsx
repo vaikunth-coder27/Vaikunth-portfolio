@@ -3,70 +3,78 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { LimelightNav, NavItem } from '@/components/ui/limelight-nav'
 
 const navLinks = [
   { label: 'About',      href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects',   href: '#projects' },
-  { label: 'Skills',       href: '#skills' },
-  { label: 'Contact',      href: '#contact' },
+  { label: 'Skills',     href: '#skills' },
+  { label: 'Contact',    href: '#contact' },
 ]
 
-const mobileNav = [
+const mobileNavItems: NavItem[] = [
   {
+    id: 'about',
     label: 'About',
-    href: '#about',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
         <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
         <circle cx="12" cy="7" r="4" />
       </svg>
     ),
+    onClick: () => { window.location.href = '#about' },
   },
   {
+    id: 'experience',
     label: 'Experience',
-    href: '#experience',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" />
         <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
       </svg>
     ),
+    onClick: () => { window.location.href = '#experience' },
   },
   {
+    id: 'projects',
     label: 'Projects',
-    href: '#projects',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </svg>
     ),
+    onClick: () => { window.location.href = '#projects' },
   },
   {
+    id: 'skills',
     label: 'Skills',
-    href: '#skills',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
       </svg>
     ),
+    onClick: () => { window.location.href = '#skills' },
   },
   {
+    id: 'contact',
     label: 'Contact',
-    href: '#contact',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
         <polyline points="22,6 12,13 2,6" />
       </svg>
     ),
+    onClick: () => { window.location.href = '#contact' },
   },
 ]
 
+const sectionIds = navLinks.map(l => l.href.replace('#', ''))
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [active, setActive] = useState('')
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -74,18 +82,20 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Track active section for bottom nav highlight
+  // Sync limelight with the active section via IntersectionObserver
   useEffect(() => {
-    const sections = navLinks.map(l => l.href.replace('#', ''))
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) setActive(entry.target.id)
+          if (entry.isIntersecting) {
+            const idx = sectionIds.indexOf(entry.target.id)
+            if (idx !== -1) setActiveIndex(idx)
+          }
         })
       },
       { rootMargin: '-40% 0px -55% 0px' }
     )
-    sections.forEach(id => {
+    sectionIds.forEach(id => {
       const el = document.getElementById(id)
       if (el) observer.observe(el)
     })
@@ -126,38 +136,25 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-
         </div>
       </motion.div>
 
-      {/* ── Mobile bottom tab bar ── */}
-      <motion.nav
+      {/* ── Mobile bottom limelight nav ── */}
+      <motion.div
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.4 }}
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex justify-center pb-3 pt-2 bg-black"
       >
-        <div className="bg-black/90 backdrop-blur-2xl border-t border-white/8 px-2 pb-safe">
-          <div className="grid grid-cols-5 h-16">
-            {mobileNav.map((item) => {
-              const isActive = active === item.href.replace('#', '')
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={cn(
-                    'flex flex-col items-center justify-center gap-1 transition-colors duration-200',
-                    isActive ? 'text-white' : 'text-neutral-600 hover:text-neutral-400'
-                  )}
-                >
-                  {item.icon}
-                  <span className="text-[10px] font-mono tracking-wide">{item.label}</span>
-                </a>
-              )
-            })}
-          </div>
-        </div>
-      </motion.nav>
+        <LimelightNav
+          items={mobileNavItems}
+          activeIndex={activeIndex}
+          onTabChange={setActiveIndex}
+          className="!h-12 rounded-2xl"
+          iconContainerClassName="!p-3"
+          iconClassName="!w-5 !h-5 text-white"
+        />
+      </motion.div>
     </>
   )
 }
