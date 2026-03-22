@@ -18,7 +18,7 @@ export function Experience() {
           ref={ref}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
             02 — Experience
@@ -46,7 +46,7 @@ export function Experience() {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.15 }}
             className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-12 overflow-hidden"
           >
             {/* Subtle glow */}
@@ -149,7 +149,7 @@ export function Experience() {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.3 }}
             className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-12 overflow-hidden"
           >
             {/* Subtle glow */}

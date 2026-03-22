@@ -36,7 +36,7 @@ function ProjectCard({
       ref={ref}
       initial={{ opacity: 0, y: 36 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.07 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: index * 0.07 }}
       className={`group relative rounded-2xl border border-white/8 bg-white/[0.02] p-6 overflow-hidden flex flex-col justify-between hover:border-white/15 transition-all duration-500 ${className}`}
     >
       {/* Hover gradient */}
@@ -100,7 +100,7 @@ export function Projects() {
           ref={ref}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
             03 — Projects

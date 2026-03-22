@@ -32,7 +32,7 @@ export function Education() {
           ref={ref}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
             05 — Education
@@ -60,7 +60,7 @@ export function Education() {
               key={edu.institution}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.1 + i * 0.12 }}
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.1 + i * 0.12 }}
               className="relative rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden"
             >
               {/* Gradient top bar */}

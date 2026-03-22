@@ -17,7 +17,7 @@ export function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-8">
             06 — Contact
@@ -28,7 +28,7 @@ export function Contact() {
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.1 }}
           className="text-[clamp(3rem,8vw,7rem)] font-serif italic font-semibold text-white leading-[0.9] mb-4"
           style={{ fontFamily: 'var(--font-cormorant)' }}
         >
@@ -38,7 +38,7 @@ export function Contact() {
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.18 }}
           className="text-[clamp(3rem,8vw,7rem)] font-serif italic font-semibold leading-[0.9] mb-12"
           style={{
             fontFamily: 'var(--font-cormorant)',
@@ -54,7 +54,7 @@ export function Contact() {
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.3 }}
           className="text-neutral-500 text-base font-light max-w-lg mx-auto mb-12 leading-relaxed"
         >
           Whether it&apos;s a research collaboration, a full-time role, or an ambitious
@@ -65,7 +65,7 @@ export function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <a
