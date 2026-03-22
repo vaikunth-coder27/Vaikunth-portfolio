@@ -104,6 +104,46 @@ export const projects = [
     category: "Computer Vision",
     color: "from-red-500/20 to-rose-500/20",
   },
+  {
+    title: "Chess Engine",
+    description:
+      "Developed an optimized chess engine using Reinforcement Learning with a custom Agent and Deep Q-Network Architecture (DQNA), paired with an interactive GUI built in PyQt5.",
+    tags: ["Python", "Reinforcement Learning", "DQN", "Neural Networks", "PyQt5"],
+    category: "Machine Learning",
+    color: "from-amber-500/20 to-orange-500/20",
+  },
+  {
+    title: "Autonomous Navigation Transporter",
+    description:
+      "Built a maze-solving bot that processes maze images, autonomously traverses through the maze, and reaches the destination. Hardware implementation using ESP32 Camera module and NodeMCU.",
+    tags: ["Python", "Arduino IDE", "ESP32", "NodeMCU", "Image Processing"],
+    category: "Computer Vision",
+    color: "from-teal-500/20 to-cyan-500/20",
+  },
+  {
+    title: "Chat-Bot",
+    description:
+      "Designed a sentiment-aware chatbot deployed on WhatsApp, Telegram, and web pages using NLP and LSTM. Also built a voice-controlled CLI music player application.",
+    tags: ["Python", "NLP", "LSTM", "WhatsApp API", "Telegram API"],
+    category: "NLP",
+    color: "from-indigo-500/20 to-violet-500/20",
+  },
+  {
+    title: "Face Detection & Recognition",
+    description:
+      "Face detection and recognition system using Haarcascade Frontal Face Algorithm, with OTP email verification for face registration/removal and automated attendance tracking.",
+    tags: ["Python", "OpenCV", "Haarcascade", "Deep Learning", "SMTP"],
+    category: "Computer Vision",
+    color: "from-pink-500/20 to-rose-500/20",
+  },
+  {
+    title: "Rangeless Bot",
+    description:
+      "Built a DTMF-controlled Arduino bot deployable in hostile environments, controllable from any location regardless of the user's physical position.",
+    tags: ["DTMF", "Arduino", "Python", "Embedded Systems", "Robotics"],
+    category: "Machine Learning",
+    color: "from-lime-500/20 to-green-500/20",
+  },
 ]
 
 export const skills = {
@@ -123,6 +163,6 @@ export const skills = {
 export const stats = [
   { label: "MSc GPA", value: "82%" },
   { label: "BE CGPA", value: "9.5/10" },
-  { label: "Projects", value: "6+" },
+  { label: "Projects", value: "10+" },
   { label: "Tech Stack", value: "20+" },
 ]

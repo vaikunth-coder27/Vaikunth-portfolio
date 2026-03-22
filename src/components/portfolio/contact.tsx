@@ -20,7 +20,7 @@ export function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-8">
-            06 — Contact
+            08 — Contact
           </p>
         </motion.div>
 
@@ -39,7 +39,7 @@ export function Contact() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.18 }}
-          className="text-[clamp(2.5rem,8vw,7rem)] font-serif italic font-semibold leading-[0.9] mb-10 md:mb-12"
+          className="text-[clamp(2.5rem,8vw,7rem)] font-serif italic font-semibold leading-[0.9] pb-6 mb-10 md:mb-12"
           style={{
             fontFamily: 'var(--font-cormorant)',
             background: 'linear-gradient(135deg, #22d3ee 0%, #818cf8 50%, #c084fc 100%)',

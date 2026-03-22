@@ -8,6 +8,7 @@ const categoryColors: Record<string, string> = {
   NLP: 'text-cyan-400 border-cyan-500/20 bg-cyan-500/5',
   'Computer Vision': 'text-purple-400 border-purple-500/20 bg-purple-500/5',
   'Machine Learning': 'text-emerald-400 border-emerald-500/20 bg-emerald-500/5',
+  'Embedded Systems': 'text-amber-400 border-amber-500/20 bg-amber-500/5',
 }
 
 const gradients: string[] = [
@@ -121,12 +122,12 @@ export function Projects() {
             </span>
           </h2>
           <p className="text-neutral-500 text-sm font-light mb-16 max-w-md">
-            Six projects spanning NLP, Computer Vision, and Machine Learning —
+            Eleven projects spanning NLP, Computer Vision, and Machine Learning —
             each solving a real problem with cutting-edge techniques.
           </p>
         </motion.div>
 
-        {/* Bento grid — irregular layout */}
+        {/* Bento grid — featured projects */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Row 1: large (2 col) + normal (1 col) */}
           <ProjectCard project={projects[0]} index={0} className="md:col-span-2 min-h-[280px]" />
@@ -139,6 +140,20 @@ export function Projects() {
 
           {/* Row 3: full width */}
           <ProjectCard project={projects[5]} index={5} className="md:col-span-3 min-h-[220px] md:flex-row" />
+        </div>
+
+        {/* Earlier work */}
+        <div className="mt-16">
+          <p className="font-mono text-xs text-neutral-600 tracking-[0.25em] uppercase mb-6">
+            Earlier Work
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <ProjectCard project={projects[6]}  index={6}  className="min-h-[240px]" />
+            <ProjectCard project={projects[7]}  index={7}  className="md:col-span-2 min-h-[240px]" />
+            <ProjectCard project={projects[8]}  index={8}  className="md:col-span-2 min-h-[240px]" />
+            <ProjectCard project={projects[9]}  index={9}  className="min-h-[240px]" />
+            <ProjectCard project={projects[10]} index={10} className="md:col-span-3 min-h-[200px]" />
+          </div>
         </div>
       </div>
     </section>

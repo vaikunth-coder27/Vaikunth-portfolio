@@ -4,6 +4,11 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { education } from '@/lib/data'
 
+const universityImages: Record<string, string> = {
+  'The University of Edinburgh': '/University of Edinburgh.png',
+  'Anna University': '/anna university.png',
+}
+
 export function Education() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
@@ -54,7 +59,7 @@ export function Education() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-4">
           {cards.map((edu, i) => (
             <motion.div
               key={edu.institution}
@@ -66,44 +71,60 @@ export function Education() {
               {/* Gradient top bar */}
               <div className={`h-1 w-full bg-gradient-to-r ${edu.gradient}`} />
 
+              {/* University image — left half only, fades to transparent at its right edge */}
+              <div
+                className="hidden md:block absolute left-0 top-1 bottom-0 w-1/2"
+                style={{
+                  maskImage: 'linear-gradient(to right, black 0%, black 60%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to right, black 0%, black 60%, transparent 100%)',
+                }}
+              >
+                <img
+                  src={universityImages[edu.institution]}
+                  alt={edu.institution}
+                  className="w-full h-full object-cover object-left opacity-70"
+                />
+              </div>
+
               {/* Glow */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{ background: `radial-gradient(ellipse 80% 40% at 50% 0%, ${edu.glow}, transparent)` }}
               />
 
-              <div className="p-8 relative z-10">
-                {/* Period */}
-                <span className="inline-block font-mono text-xs text-neutral-600 border border-white/8 rounded-full px-3 py-1 mb-5 tracking-wider">
-                  {edu.period}
-                </span>
+              {/* Content — starts from center on desktop */}
+              <div className="relative z-10 px-8 py-5 md:pl-[50%]">
+                {/* Top row: period + grade */}
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-block font-mono text-xs text-neutral-600 border border-white/8 rounded-full px-3 py-1 tracking-wider">
+                    {edu.period}
+                  </span>
+                  <div className={`inline-flex items-center gap-2 border ${edu.borderAccent} rounded-full px-3 py-1`}
+                    style={{ background: `${edu.glow.replace('0.06', '0.05').replace('0.08', '0.06')}` }}>
+                    <span className={`text-sm font-serif italic font-semibold ${edu.accentColor}`}
+                      style={{ fontFamily: 'var(--font-cormorant)' }}>
+                      {edu.grade}
+                    </span>
+                  </div>
+                </div>
 
                 {/* Institution */}
                 <h3
-                  className="text-2xl md:text-3xl font-serif italic font-semibold text-white leading-tight mb-2"
+                  className="text-2xl md:text-3xl font-serif italic font-semibold text-white leading-tight mb-1"
                   style={{ fontFamily: 'var(--font-cormorant)' }}
                 >
                   {edu.institution}
                 </h3>
 
                 {/* Degree */}
-                <p className="text-neutral-400 font-light text-sm mb-1">{edu.degree}</p>
+                <p className="text-neutral-400 font-light text-sm mb-0.5">{edu.degree}</p>
 
                 {/* Location */}
-                <p className="text-neutral-600 font-mono text-xs mb-5">{edu.location}</p>
-
-                {/* Grade highlight */}
-                <div className={`inline-flex items-center gap-2 border ${edu.borderAccent} rounded-full px-4 py-2 mb-6`}
-                  style={{ background: `${edu.glow.replace('0.06', '0.05').replace('0.08', '0.06')}` }}>
-                  <span className={`text-sm font-serif italic font-semibold ${edu.accentColor}`}
-                    style={{ fontFamily: 'var(--font-cormorant)' }}>
-                    {edu.grade}
-                  </span>
-                </div>
+                <p className="text-neutral-600 font-mono text-xs mb-3">{edu.location}</p>
 
                 {/* Courses */}
                 <div>
-                  <p className="text-xs font-mono text-neutral-600 tracking-widest uppercase mb-3">
+                  <p className="text-xs font-mono text-neutral-600 tracking-widest uppercase mb-2">
                     Relevant Courses
                   </p>
                   <div className="flex flex-wrap gap-2">

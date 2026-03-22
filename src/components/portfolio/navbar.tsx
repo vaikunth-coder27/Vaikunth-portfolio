@@ -8,8 +8,8 @@ const navLinks = [
   { label: 'About',      href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects',   href: '#projects' },
-  { label: 'Skills',     href: '#skills' },
-  { label: 'Contact',    href: '#contact' },
+  { label: 'Skills',       href: '#skills' },
+  { label: 'Contact',      href: '#contact' },
 ]
 
 const mobileNav = [
@@ -127,12 +127,6 @@ export function Navbar() {
             </a>
           ))}
 
-          <a
-            href="mailto:vaikunthgc@gmail.com"
-            className="ml-1 text-sm px-5 py-1.5 rounded-full bg-white text-black font-medium hover:bg-neutral-100 transition-colors tracking-wide"
-          >
-            Hire Me
-          </a>
         </div>
       </motion.div>
 

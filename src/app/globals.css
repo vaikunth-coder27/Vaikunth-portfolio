@@ -50,6 +50,7 @@
   --animate-marquee: marquee 35s linear infinite;
   --animate-marquee-reverse: marquee-reverse 35s linear infinite;
   --animate-fade-up: fade-up 0.7s ease forwards;
+  --animate-meteor-effect: meteor 5s linear infinite;
   --font-serif: var(--font-cormorant);
 }
 
@@ -71,6 +72,12 @@
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes meteor {
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
 }
 
 :root {

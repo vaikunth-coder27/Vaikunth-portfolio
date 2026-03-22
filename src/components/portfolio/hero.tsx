@@ -27,15 +27,15 @@ export function Hero() {
         <div className="flex-1 flex flex-col items-center md:items-start gap-5 z-10 text-center md:text-left">
 
           {/* Available badge */}
-          <motion.div {...fadeUp(0.1)}>
+          {/* <motion.div {...fadeUp(0.1)}>
             <span className="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-1.5 text-xs text-neutral-400 bg-white/5 backdrop-blur-sm font-mono tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Open to opportunities
             </span>
-          </motion.div>
+          </motion.div> */}
 
           {/* Name — big serif italic */}
-          <div className="flex flex-col gap-0 leading-none">
+          <div className="flex flex-col gap-0 leading-none pb-6">
             <motion.h1
               {...fadeUp(0.2)}
               className="text-[clamp(3.2rem,12vw,8.5rem)] font-serif italic font-semibold text-white leading-[0.9] tracking-tight"
@@ -96,14 +96,14 @@ export function Hero() {
           </motion.div>
 
           {/* Stats row — 2×2 grid on mobile, single row on md+ */}
-          <motion.div
+          {/* <motion.div
             {...fadeUp(0.7)}
             className="grid grid-cols-2 gap-x-8 gap-y-4 md:flex md:gap-8 mt-2 pt-6 border-t border-white/8 w-full"
           >
             {[
               { value: '82%', label: 'MSc Distinction' },
               { value: '9.5', label: 'BE CGPA / 10' },
-              { value: '6+',  label: 'AI Projects' },
+              { value: '10+', label: 'AI Projects' },
               { value: '20+', label: 'Technologies' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col gap-0.5">
@@ -118,7 +118,7 @@ export function Hero() {
                 </span>
               </div>
             ))}
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Right — 3D Spline robot (desktop only) */}

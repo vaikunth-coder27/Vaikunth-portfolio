@@ -90,7 +90,7 @@ export function About() {
           {/* Right column */}
           <div className="flex flex-col gap-4">
             {/* Currently card */}
-            <AnimatedSection delay={0.2}>
+            {/* <AnimatedSection delay={0.2}>
               <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -102,7 +102,7 @@ export function About() {
                 </p>
                 <p className="text-neutral-600 text-xs mt-2 font-mono">Graduate visa — authorized to work</p>
               </div>
-            </AnimatedSection>
+            </AnimatedSection> */}
 
             {/* Location card */}
             <AnimatedSection delay={0.3}>
