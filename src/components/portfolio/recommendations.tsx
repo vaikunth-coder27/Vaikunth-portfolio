@@ -34,7 +34,7 @@ export function Recommendations() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="recommendations" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
+    <section id="recommendations" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -42,11 +42,11 @@ export function Recommendations() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             07 — Recommendations
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-white mb-16 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-16 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Words from those
@@ -73,7 +73,7 @@ export function Recommendations() {
                 ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 delay: 0.15 + i * 0.15,
               }}
-              className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-10 overflow-hidden flex flex-col"
+              className="relative rounded-2xl border border-p-border bg-p-surface p-8 md:p-10 overflow-hidden flex flex-col"
             >
               {/* Radial glow */}
               <div
@@ -101,7 +101,7 @@ export function Recommendations() {
 
               {/* Quote body */}
               <blockquote className="relative z-10 flex-1">
-                <p className="text-neutral-300 leading-relaxed text-base font-light whitespace-pre-line">
+                <p className="text-p-text-2 leading-relaxed text-base font-light whitespace-pre-line">
                   {rec.quote}
                 </p>
               </blockquote>
@@ -116,21 +116,21 @@ export function Recommendations() {
               <div className="relative z-10 flex items-start justify-between gap-4">
                 <div>
                   <p
-                    className="text-white font-serif italic text-xl font-semibold"
+                    className="text-p-text font-serif italic text-xl font-semibold"
                     style={{ fontFamily: 'var(--font-cormorant)' }}
                   >
                     {rec.name}
                   </p>
-                  <p className="text-neutral-400 text-sm font-light mt-0.5">
+                  <p className="text-p-text-3 text-sm font-light mt-0.5">
                     {rec.title}{' '}
-                    <span className="text-neutral-600">·</span>{' '}
+                    <span className="text-p-text-5">·</span>{' '}
                     {rec.company}
                   </p>
-                  <p className="font-mono text-xs text-neutral-600 tracking-wide mt-1.5">
+                  <p className="font-mono text-xs text-p-text-5 tracking-wide mt-1.5">
                     {rec.relationship}
                   </p>
                 </div>
-                <span className="flex-shrink-0 font-mono text-xs text-neutral-600 border border-white/10 rounded-full px-3 py-1.5 tracking-wide whitespace-nowrap">
+                <span className="flex-shrink-0 font-mono text-xs text-p-text-5 border border-p-border rounded-full px-3 py-1.5 tracking-wide whitespace-nowrap">
                   {rec.date}
                 </span>
               </div>

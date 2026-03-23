@@ -79,7 +79,7 @@ export const LimelightNav = ({
   };
 
   return (
-    <nav className={`relative inline-flex items-center h-16 rounded-lg bg-[#111111] text-white border border-white/10 px-2 ${className ?? ''}`}>
+    <nav className={`relative inline-flex items-center h-16 rounded-lg dark:bg-[#111111] bg-neutral-100 dark:text-white text-neutral-800 dark:border-white/10 border-black/10 px-2 ${className ?? ''}`}>
       {items.map(({ id, icon, label, onClick }, index) => (
         <a
           key={id}
@@ -98,12 +98,12 @@ export const LimelightNav = ({
 
       <div
         ref={limelightRef}
-        className={`absolute top-0 z-10 w-11 h-[5px] rounded-full bg-white shadow-[0_50px_20px_rgba(255,255,255,0.55)] ${
+        className={`absolute top-0 z-10 w-11 h-[5px] rounded-full dark:bg-white bg-neutral-700 dark:shadow-[0_50px_20px_rgba(255,255,255,0.55)] shadow-[0_50px_20px_rgba(0,0,0,0.18)] ${
           isReady ? 'transition-[left] duration-400 ease-in-out' : ''
         } ${limelightClassName ?? ''}`}
         style={{ left: '-999px' }}
       >
-        <div className="absolute left-[-30%] top-[5px] w-[160%] h-14 [clip-path:polygon(5%_100%,25%_0,75%_0,95%_100%)] bg-gradient-to-b from-white/25 to-transparent pointer-events-none" />
+        <div className="absolute left-[-30%] top-[5px] w-[160%] h-14 [clip-path:polygon(5%_100%,25%_0,75%_0,95%_100%)] bg-gradient-to-b dark:from-white/25 from-neutral-700/25 to-transparent pointer-events-none" />
       </div>
     </nav>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -31,15 +32,25 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "h-full antialiased",
+        "h-full antialiased dark",
         geistSans.variable,
         geistMono.variable,
         jetbrainsMono.variable,
         cormorant.variable
       )}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-black" suppressHydrationWarning>
-        {children}
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('portfolio-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

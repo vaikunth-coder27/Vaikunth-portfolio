@@ -18,20 +18,20 @@ export function Education() {
       ...education[0],
       gradient: 'from-blue-500 via-indigo-500 to-purple-600',
       glow: 'rgba(99,102,241,0.08)',
-      accentColor: 'text-indigo-400',
+      accentColor: 'text-indigo-500 dark:text-indigo-400',
       borderAccent: 'border-indigo-500/20',
     },
     {
       ...education[1],
       gradient: 'from-orange-400 via-red-500 to-rose-600',
       glow: 'rgba(239,68,68,0.06)',
-      accentColor: 'text-rose-400',
+      accentColor: 'text-rose-500 dark:text-rose-400',
       borderAccent: 'border-rose-500/20',
     },
   ]
 
   return (
-    <section id="education" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
+    <section id="education" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -39,11 +39,11 @@ export function Education() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             05 — Education
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-white mb-16 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-16 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Foundations of
@@ -66,7 +66,7 @@ export function Education() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.1 + i * 0.12 }}
-              className="relative rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden"
+              className="relative rounded-2xl border border-p-border-subtle bg-p-surface overflow-hidden"
             >
               {/* Gradient top bar */}
               <div className={`h-1 w-full bg-gradient-to-r ${edu.gradient}`} />
@@ -82,7 +82,7 @@ export function Education() {
                 <img
                   src={universityImages[edu.institution]}
                   alt={edu.institution}
-                  className="w-full h-full object-cover object-left opacity-70"
+                  className="w-full h-full object-cover object-left dark:opacity-70 opacity-40"
                 />
               </div>
 
@@ -96,7 +96,7 @@ export function Education() {
               <div className="relative z-10 px-8 py-5 md:pl-[50%]">
                 {/* Top row: period + grade */}
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-block font-mono text-xs text-neutral-600 border border-white/8 rounded-full px-3 py-1 tracking-wider">
+                  <span className="inline-block font-mono text-xs text-p-text-5 border border-p-border-subtle rounded-full px-3 py-1 tracking-wider">
                     {edu.period}
                   </span>
                   <div className={`inline-flex items-center gap-2 border ${edu.borderAccent} rounded-full px-3 py-1`}
@@ -110,28 +110,28 @@ export function Education() {
 
                 {/* Institution */}
                 <h3
-                  className="text-2xl md:text-3xl font-serif italic font-semibold text-white leading-tight mb-1"
+                  className="text-2xl md:text-3xl font-serif italic font-semibold text-p-text leading-tight mb-1"
                   style={{ fontFamily: 'var(--font-cormorant)' }}
                 >
                   {edu.institution}
                 </h3>
 
                 {/* Degree */}
-                <p className="text-neutral-400 font-light text-sm mb-0.5">{edu.degree}</p>
+                <p className="text-p-text-3 font-light text-sm mb-0.5">{edu.degree}</p>
 
                 {/* Location */}
-                <p className="text-neutral-600 font-mono text-xs mb-3">{edu.location}</p>
+                <p className="text-p-text-5 font-mono text-xs mb-3">{edu.location}</p>
 
                 {/* Courses */}
                 <div>
-                  <p className="text-xs font-mono text-neutral-600 tracking-widest uppercase mb-2">
+                  <p className="text-xs font-mono text-p-text-5 tracking-widest uppercase mb-2">
                     Relevant Courses
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {edu.courses.map(course => (
                       <span
                         key={course}
-                        className="text-xs border border-white/8 text-neutral-500 px-3 py-1 rounded-full font-mono"
+                        className="text-xs border border-p-border-subtle text-p-text-4 px-3 py-1 rounded-full font-mono"
                       >
                         {course}
                       </span>

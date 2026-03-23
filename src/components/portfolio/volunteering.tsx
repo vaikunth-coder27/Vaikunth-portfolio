@@ -59,7 +59,7 @@ export function Volunteering() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="volunteering" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
+    <section id="volunteering" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -67,11 +67,11 @@ export function Volunteering() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             06 — Volunteering
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-white mb-4 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-4 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Giving back to
@@ -85,7 +85,7 @@ export function Volunteering() {
               the community.
             </span>
           </h2>
-          <p className="text-neutral-500 text-sm font-light mb-16 max-w-md">
+          <p className="text-p-text-4 text-sm font-light mb-16 max-w-md">
             Leadership and community roles beyond the classroom — organizing events,
             mentoring peers, and driving technical initiatives.
           </p>
@@ -119,7 +119,7 @@ function VolunteerCard({
         ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
         delay: 0.15 + index * 0.15,
       }}
-      className={`relative rounded-2xl border ${role.border} bg-white/[0.02] p-8 overflow-hidden flex flex-col gap-6`}
+      className={`relative rounded-2xl border ${role.border} bg-p-surface p-8 overflow-hidden flex flex-col gap-6`}
     >
       {/* Radial glow */}
       <div
@@ -135,30 +135,30 @@ function VolunteerCard({
       <div className="relative z-10 flex flex-col gap-1">
         <div className="flex items-center gap-2 mb-1">
           <span className={`w-1.5 h-1.5 rounded-full ${role.dot}`} />
-          <span className="font-mono text-xs text-neutral-600 tracking-wider uppercase">
+          <span className="font-mono text-xs text-p-text-5 tracking-wider uppercase">
             {role.period}
           </span>
         </div>
         <h3
-          className="text-2xl font-serif italic font-semibold text-white leading-tight"
+          className="text-2xl font-serif italic font-semibold text-p-text leading-tight"
           style={{ fontFamily: 'var(--font-cormorant)' }}
         >
           {role.title}
         </h3>
-        <p className="text-neutral-300 font-light text-base">{role.org}</p>
-        <p className="text-xs font-mono text-neutral-600 tracking-wide">{role.sub}</p>
+        <p className="text-p-text-2 font-light text-base">{role.org}</p>
+        <p className="text-xs font-mono text-p-text-5 tracking-wide">{role.sub}</p>
       </div>
 
       {/* Highlights */}
       <div className="relative z-10 flex flex-col gap-4">
         {role.highlights.map((h) => (
           <div key={h.label} className="flex gap-3">
-            <div className="mt-1.5 w-px self-stretch bg-white/8 flex-shrink-0" />
+            <div className="mt-1.5 w-px self-stretch bg-p-border-subtle flex-shrink-0" />
             <div>
-              <p className="text-xs font-mono text-neutral-500 tracking-wider uppercase mb-0.5">
+              <p className="text-xs font-mono text-p-text-4 tracking-wider uppercase mb-0.5">
                 {h.label}
               </p>
-              <p className="text-neutral-400 text-sm leading-relaxed font-light">{h.text}</p>
+              <p className="text-p-text-3 text-sm leading-relaxed font-light">{h.text}</p>
             </div>
           </div>
         ))}

@@ -14,7 +14,7 @@ export function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="experience" className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
+    <section id="experience" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -22,11 +22,11 @@ export function Experience() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             02 — Experience
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-white mb-16 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-16 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Where I&apos;ve made
@@ -49,7 +49,7 @@ export function Experience() {
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.15 }}
-            className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-12 overflow-hidden"
+            className="relative rounded-2xl border border-p-border bg-p-surface p-8 md:p-12 overflow-hidden"
           >
             {/* Subtle glow */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,rgba(59,130,246,0.06),transparent)] pointer-events-none" />
@@ -58,29 +58,29 @@ export function Experience() {
               <div className="flex flex-col gap-2">
                 {/* ZOT wordmark */}
                 <div className="flex items-center gap-3 mb-2">
-                  <a href="https://www.zot.co.uk/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden hover:border-white/20 transition-colors flex-shrink-0">
+                  <a href="https://www.zot.co.uk/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-p-surface border border-p-border flex items-center justify-center overflow-hidden hover:border-p-border transition-colors flex-shrink-0">
                     <img src={`${BASE}/logo_zot.ico`} alt="ZOT" className="w-7 h-7 object-contain" />
                   </a>
                   <div>
                     <a href="https://www.zot.co.uk/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5">
                       <p
-                        className="text-2xl font-serif italic font-semibold text-white group-hover:text-neutral-300 transition-colors"
+                        className="text-2xl font-serif italic font-semibold text-p-text group-hover:text-p-text-3 transition-colors"
                         style={{ fontFamily: 'var(--font-cormorant)' }}
                       >
                         ZOT
                       </p>
-                      <span className="text-neutral-600 text-xs group-hover:text-neutral-400 transition-colors">↗</span>
+                      <span className="text-p-text-5 text-xs group-hover:text-p-text-4 transition-colors">↗</span>
                     </a>
-                    <p className="text-xs font-mono text-neutral-600 tracking-wide">zot.co.uk · PCB & Precision Manufacturing, United Kingdom</p>
+                    <p className="text-xs font-mono text-p-text-5 tracking-wide">zot.co.uk · PCB & Precision Manufacturing, United Kingdom</p>
                   </div>
                 </div>
-                <p className="text-neutral-300 font-light text-base">
+                <p className="text-p-text-2 font-light text-base">
                   Full-Stack Software Engineer · End-to-End Ownership
                 </p>
               </div>
 
               <div className="flex-shrink-0 flex flex-col items-end gap-2">
-                <span className="inline-block font-mono text-xs text-neutral-500 border border-white/10 rounded-full px-4 py-1.5 tracking-wider">
+                <span className="inline-block font-mono text-xs text-p-text-4 border border-p-border rounded-full px-4 py-1.5 tracking-wider">
                   Feb 2025 – Present
                 </span>
                 <span className="inline-block font-mono text-xs text-emerald-500/70 border border-emerald-500/20 rounded-full px-4 py-1.5 tracking-wider">
@@ -90,44 +90,44 @@ export function Experience() {
             </div>
 
             {/* Description */}
-            <p className="text-neutral-400 leading-relaxed text-base mb-6 max-w-3xl font-light">
+            <p className="text-p-text-3 leading-relaxed text-base mb-6 max-w-3xl font-light">
               Responsible for designing, building, and deploying a production-grade
               platform — a public customer website with{' '}
               <span
-                className="text-white font-serif italic"
+                className="text-p-text font-serif italic"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
                 Angular 19 SSR & PWA
               </span>
               {' '}and a comprehensive internal ERP — backed by a{' '}
               <span
-                className="text-white font-serif italic"
+                className="text-p-text font-serif italic"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
                 Python serverless backend on Azure Functions
               </span>
               . Provisioned the full Azure cloud infrastructure: VNet, Front Door CDN,
               Private Endpoints, and Application Insights. Engineered{' '}
-              <span className="text-sky-400 font-medium">AI-native features</span>{' '}
+              <span className="text-sky-500 dark:text-sky-400 font-medium">AI-native features</span>{' '}
               across the platform — a GDPR-compliant AI-powered ATS, natural language to SQL chart recommendations,
               and Azure AI Foundry integrations for predictions and intelligent monitoring. Built a robust{' '}
               <span
-                className="text-white font-serif italic"
+                className="text-p-text font-serif italic"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
                 payroll engine
               </span>
               {' '}and dynamic dashboards with AI-driven insights, end-to-end data pipelines covering extraction,
               cleaning, preprocessing and automated visualization ideation. Implemented secure{' '}
-              <span className="text-sky-400 font-medium">RBAC</span>{' '}
+              <span className="text-sky-500 dark:text-sky-400 font-medium">RBAC</span>{' '}
               across all modules, secured with MSAL SSO, JWT, and AES-encrypted API payloads.
             </p>
 
             {/* Key achievement */}
             <div className="border-l-2 border-[#3b82f6]/40 pl-4 mb-8">
-              <p className="text-sm font-mono text-neutral-500 tracking-wide">Key achievement</p>
+              <p className="text-sm font-mono text-p-text-4 tracking-wide">Key achievement</p>
               <p
-                className="text-xl font-serif italic text-white mt-1"
+                className="text-xl font-serif italic text-p-text mt-1"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
                 {"\u201cOwned the full delivery of a production ERP platform end-to-end \u2014 full-stack, cloud-native, and AI-integrated.\u201d"}
@@ -139,7 +139,7 @@ export function Experience() {
               {zotTags.map(tag => (
                 <span
                   key={tag}
-                  className="text-xs border border-white/10 text-neutral-500 px-3 py-1 rounded-full font-mono tracking-wide hover:border-white/20 hover:text-neutral-400 transition-colors"
+                  className="text-xs border border-p-border text-p-text-4 px-3 py-1 rounded-full font-mono tracking-wide hover:border-p-border hover:text-p-text-3 transition-colors"
                 >
                   {tag}
                 </span>
@@ -152,7 +152,7 @@ export function Experience() {
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.3 }}
-            className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-12 overflow-hidden"
+            className="relative rounded-2xl border border-p-border bg-p-surface p-8 md:p-12 overflow-hidden"
           >
             {/* Subtle glow */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_70%_50%,rgba(251,146,60,0.05),transparent)] pointer-events-none" />
@@ -167,49 +167,49 @@ export function Experience() {
                   <div>
                     <a href="https://www.amazon.co.uk/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5">
                       <p
-                        className="text-2xl font-serif italic font-semibold text-white group-hover:text-neutral-300 transition-colors"
+                        className="text-2xl font-serif italic font-semibold text-p-text group-hover:text-p-text-3 transition-colors"
                         style={{ fontFamily: 'var(--font-cormorant)' }}
                       >
                         Amazon
                       </p>
-                      <span className="text-neutral-600 text-xs group-hover:text-neutral-400 transition-colors">↗</span>
+                      <span className="text-p-text-5 text-xs group-hover:text-p-text-4 transition-colors">↗</span>
                     </a>
-                    <p className="text-xs font-mono text-neutral-600 tracking-wide">Edinburgh, United Kingdom</p>
+                    <p className="text-xs font-mono text-p-text-5 tracking-wide">Edinburgh, United Kingdom</p>
                   </div>
                 </div>
-                <p className="text-neutral-300 font-light text-base">
+                <p className="text-p-text-2 font-light text-base">
                   Industry Collaborated Dissertation · MSc Research Partnership
                 </p>
               </div>
 
               <div className="flex-shrink-0 text-right">
-                <span className="inline-block font-mono text-xs text-neutral-500 border border-white/10 rounded-full px-4 py-1.5 tracking-wider">
+                <span className="inline-block font-mono text-xs text-p-text-4 border border-p-border rounded-full px-4 py-1.5 tracking-wider">
                   Mar 2024 – Aug 2024
                 </span>
               </div>
             </div>
 
             {/* Description */}
-            <p className="text-neutral-400 leading-relaxed text-base mb-6 max-w-3xl font-light">
+            <p className="text-p-text-3 leading-relaxed text-base mb-6 max-w-3xl font-light">
               Developed novel methods to analyze copyright issues in various{' '}
               <span
-                className="text-white font-serif italic"
+                className="text-p-text font-serif italic"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
                 code-based Large Language Models
               </span>
               . Extended the CodeBLEU metric and applied Few-Shot Learning
               with 8-bit quantization techniques, achieving a{' '}
-              <span className="text-emerald-400 font-medium">17% reduction in memorization</span>{' '}
+              <span className="text-emerald-500 dark:text-emerald-400 font-medium">17% reduction in memorization</span>{' '}
               while maintaining model accuracy — contributing to enhanced privacy and robustness
               in AI code generation.
             </p>
 
             {/* Key achievement */}
             <div className="border-l-2 border-[#FF9900]/40 pl-4 mb-8">
-              <p className="text-sm font-mono text-neutral-500 tracking-wide">Key achievement</p>
+              <p className="text-sm font-mono text-p-text-4 tracking-wide">Key achievement</p>
               <p
-                className="text-xl font-serif italic text-white mt-1"
+                className="text-xl font-serif italic text-p-text mt-1"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
                 {"\u201cReduced LLM memorization by 17% via 8-bit quantization without sacrificing accuracy.\u201d"}
@@ -221,7 +221,7 @@ export function Experience() {
               {amazonTags.map(tag => (
                 <span
                   key={tag}
-                  className="text-xs border border-white/10 text-neutral-500 px-3 py-1 rounded-full font-mono tracking-wide hover:border-white/20 hover:text-neutral-400 transition-colors"
+                  className="text-xs border border-p-border text-p-text-4 px-3 py-1 rounded-full font-mono tracking-wide hover:text-p-text-3 transition-colors"
                 >
                   {tag}
                 </span>

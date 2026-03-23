@@ -5,10 +5,10 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { projects } from '@/lib/data'
 
 const categoryColors: Record<string, string> = {
-  NLP: 'text-cyan-400 border-cyan-500/20 bg-cyan-500/5',
-  'Computer Vision': 'text-purple-400 border-purple-500/20 bg-purple-500/5',
-  'Machine Learning': 'text-emerald-400 border-emerald-500/20 bg-emerald-500/5',
-  'Embedded Systems': 'text-amber-400 border-amber-500/20 bg-amber-500/5',
+  NLP: 'text-cyan-500 dark:text-cyan-400 border-cyan-500/20 bg-cyan-500/5',
+  'Computer Vision': 'text-purple-500 dark:text-purple-400 border-purple-500/20 bg-purple-500/5',
+  'Machine Learning': 'text-emerald-500 dark:text-emerald-400 border-emerald-500/20 bg-emerald-500/5',
+  'Embedded Systems': 'text-amber-500 dark:text-amber-400 border-amber-500/20 bg-amber-500/5',
 }
 
 const gradients = [
@@ -40,29 +40,22 @@ function ProjectDialog({
   onClose: () => void
 }) {
   const originY = cardRect.y + cardRect.height / 2 - window.innerHeight / 2
-  // Card is below dialog center for most viewport positions
   const fromBelow = originY >= 0
 
-  // Genie clip-path keyframes — all 4-point polygons so framer-motion interpolates smoothly
-  // "sliver"  = thin strip at the end nearest the card
-  // "stretch" = macOS genie warp: the side anchored to the card stays wide, the far side is narrow
-  // "full"    = normal rectangle
   const sliver = fromBelow
-    ? 'polygon(38% 92%, 62% 92%, 62% 100%, 38% 100%)'  // strip at bottom of element
-    : 'polygon(38% 0%,  62% 0%,  62% 8%,  38% 8%)'     // strip at top of element
+    ? 'polygon(38% 92%, 62% 92%, 62% 100%, 38% 100%)'
+    : 'polygon(38% 0%,  62% 0%,  62% 8%,  38% 8%)'
 
-  // Genie warp: bottom anchored (wide) while top is still narrow — or vice versa
   const stretch = fromBelow
-    ? 'polygon(0% 0%, 100% 0%, 78% 100%, 22% 100%)'    // wide top trails, bottom narrows toward card
-    : 'polygon(22% 0%, 78% 0%, 100% 100%, 0% 100%)'    // wide bottom trails, top narrows toward card
+    ? 'polygon(0% 0%, 100% 0%, 78% 100%, 22% 100%)'
+    : 'polygon(22% 0%, 78% 0%, 100% 100%, 0% 100%)'
 
   const full = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
 
   return (
     <>
-      {/* Backdrop fades independently — faster than the window */}
       <motion.div
-        className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm"
+        className="fixed inset-0 z-50 dark:bg-black/75 bg-black/40 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -70,10 +63,9 @@ function ProjectDialog({
         onClick={onClose}
       />
 
-      {/* Dialog — genie warp from card position */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
         <motion.div
-          className="relative bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 max-w-lg w-full shadow-2xl pointer-events-auto"
+          className="relative dark:bg-[#0a0a0a] bg-white border border-p-border rounded-2xl p-8 max-w-lg w-full shadow-2xl pointer-events-auto"
           style={{ willChange: 'transform, clip-path, opacity' }}
           animate={{
             y:        [originY, originY * 0.3, 0],
@@ -94,27 +86,27 @@ function ProjectDialog({
         >
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-neutral-500 hover:text-white transition-colors text-lg leading-none"
+            className="absolute top-4 right-4 text-p-text-4 hover:text-p-text transition-colors text-lg leading-none"
           >
             ✕
           </button>
 
           <span
             className={`text-xs font-mono px-3 py-1 rounded-full border ${
-              categoryColors[project.category] ?? 'text-neutral-400 border-white/10 bg-white/5'
+              categoryColors[project.category] ?? 'text-p-text-3 border-p-border bg-p-surface'
             }`}
           >
             {project.category}
           </span>
 
           <h3
-            className="text-3xl font-serif italic font-semibold text-white mt-5 mb-3 leading-tight"
+            className="text-3xl font-serif italic font-semibold text-p-text mt-5 mb-3 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             {project.title}
           </h3>
 
-          <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+          <p className="text-p-text-3 text-sm leading-relaxed mb-6">
             {project.description}
           </p>
 
@@ -122,7 +114,7 @@ function ProjectDialog({
             {project.tags.map(tag => (
               <span
                 key={tag}
-                className="text-xs border border-white/8 text-neutral-500 px-3 py-1 rounded-full font-mono"
+                className="text-xs border border-p-border-subtle text-p-text-4 px-3 py-1 rounded-full font-mono"
               >
                 {tag}
               </span>
@@ -149,8 +141,8 @@ function CarouselCard({
     <div
       className={`relative rounded-2xl border overflow-hidden flex flex-col h-full transition-colors duration-300 ${
         isCenter
-          ? 'border-white/15 bg-white/[0.04] cursor-pointer'
-          : 'border-white/6 bg-white/[0.02] cursor-default'
+          ? 'border-p-border bg-p-surface cursor-pointer'
+          : 'border-p-border-subtle bg-p-surface/50 cursor-default'
       }`}
       onClick={isCenter ? (e) => onClick(e.currentTarget.getBoundingClientRect()) : undefined}
     >
@@ -164,19 +156,19 @@ function CarouselCard({
         <div className="flex items-start justify-between">
           <span
             className={`text-xs font-mono px-3 py-1 rounded-full border ${
-              categoryColors[project.category] ?? 'text-neutral-400 border-white/10 bg-white/5'
+              categoryColors[project.category] ?? 'text-p-text-3 border-p-border bg-p-surface'
             }`}
           >
             {project.category}
           </span>
-          <span className={`text-xl transition-colors ${isCenter ? 'text-neutral-500' : 'text-neutral-700'}`}>
+          <span className={`text-xl transition-colors ${isCenter ? 'text-p-text-4' : 'text-p-text-5'}`}>
             ↗
           </span>
         </div>
 
         <h3
           className={`font-serif italic font-semibold leading-tight transition-colors ${
-            isCenter ? 'text-white text-xl' : 'text-neutral-500 text-lg'
+            isCenter ? 'text-p-text text-xl' : 'text-p-text-4 text-lg'
           }`}
           style={{ fontFamily: 'var(--font-cormorant)' }}
         >
@@ -185,7 +177,7 @@ function CarouselCard({
 
         <p
           className={`text-sm leading-relaxed font-light flex-1 ${
-            isCenter ? 'text-neutral-400' : 'text-neutral-600'
+            isCenter ? 'text-p-text-3' : 'text-p-text-5'
           }`}
         >
           {project.description}
@@ -195,13 +187,13 @@ function CarouselCard({
           {project.tags.slice(0, 4).map(tag => (
             <span
               key={tag}
-              className="text-xs border border-white/8 text-neutral-600 px-2.5 py-0.5 rounded-full font-mono"
+              className="text-xs border border-p-border-subtle text-p-text-5 px-2.5 py-0.5 rounded-full font-mono"
             >
               {tag}
             </span>
           ))}
           {project.tags.length > 4 && (
-            <span className="text-xs text-neutral-700 px-2.5 py-0.5 font-mono">
+            <span className="text-xs text-p-text-5 px-2.5 py-0.5 font-mono">
               +{project.tags.length - 4}
             </span>
           )}
@@ -229,7 +221,7 @@ export function Projects() {
   const currentProjIdx = ((centerIdx % N) + N) % N
 
   return (
-    <section id="projects" ref={sectionRef} className="relative py-16 md:py-32 px-5 md:px-6 bg-black">
+    <section id="projects" ref={sectionRef} className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -237,11 +229,11 @@ export function Projects() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             03 — Projects
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-white mb-4 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-4 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Things I&apos;ve
@@ -257,7 +249,7 @@ export function Projects() {
               engineered.
             </span>
           </h2>
-          <p className="text-neutral-500 text-sm font-light mb-16 max-w-md">
+          <p className="text-p-text-4 text-sm font-light mb-16 max-w-md">
             Eleven projects spanning NLP, Computer Vision, and Machine Learning —
             each solving a real problem with cutting-edge techniques.
           </p>
@@ -271,19 +263,19 @@ export function Projects() {
           onMouseLeave={() => setPaused(false)}
         >
           {/* Edge fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
 
           {/* Arrow buttons */}
           <button
             onClick={() => setCenterIdx(prev => prev - 1)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-black/60 text-neutral-400 hover:text-white hover:border-white/25 transition-all duration-200"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full border border-p-border dark:bg-black/60 bg-white/80 text-p-text-3 hover:text-p-text hover:border-p-border transition-all duration-200"
           >
             ←
           </button>
           <button
             onClick={() => setCenterIdx(prev => prev + 1)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-black/60 text-neutral-400 hover:text-white hover:border-white/25 transition-all duration-200"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full border border-p-border dark:bg-black/60 bg-white/80 text-p-text-3 hover:text-p-text hover:border-p-border transition-all duration-200"
           >
             →
           </button>
@@ -332,8 +324,8 @@ export function Projects() {
               }}
               className={`rounded-full transition-all duration-300 ${
                 currentProjIdx === i
-                  ? 'w-6 h-1.5 bg-white'
-                  : 'w-1.5 h-1.5 bg-neutral-700 hover:bg-neutral-500'
+                  ? 'w-6 h-1.5 bg-p-text'
+                  : 'w-1.5 h-1.5 bg-p-text-5 hover:bg-p-text-4'
               }`}
             />
           ))}
