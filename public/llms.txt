@@ -1,0 +1,42 @@
+# Vaikunth Guruswamy
+
+> AI Researcher and ML Engineer based in the UK. MSc Artificial Intelligence (Distinction, 82%)
+> from the University of Edinburgh. Currently Full-Stack Software Engineer at ZOT, UK.
+> Specialising in Machine Learning, Deep Learning, NLP, LLMs, and full-stack web development.
+
+## About
+
+Vaikunth Guruswamy is an AI-focused engineer with hands-on experience building production ML
+systems, full-stack applications, and cloud infrastructure. His work spans research-grade deep
+learning (Amazon collaboration on LLM memorisation) to deployed enterprise software (ERP, ATS,
+and Azure cloud platforms at ZOT).
+
+## Experience
+
+- Full-Stack Software Engineer — ZOT, UK (Feb 2025 – Present)
+  Built production Angular 19 + Python/Azure ERP with AI-native features, RBAC, and SSO.
+- Industry Collaborated Dissertation — Amazon (Mar 2024 – Aug 2024)
+  Reduced LLM memorisation by 17% using Few-Shot Learning and 8-bit quantisation.
+
+## Education
+
+- MSc Artificial Intelligence — University of Edinburgh (2023–2024), 82% Distinction
+- BE Electronics and Communication — Anna University (2019–2023), CGPA 9.50/10
+
+## Key Skills
+
+Machine Learning, Deep Learning, Natural Language Processing, Large Language Models, Transformers,
+Computer Vision, Generative AI, LLMOps, Python, PyTorch, TensorFlow, React, Angular, Next.js,
+TypeScript, Azure, Docker, PostgreSQL.
+
+## Projects
+
+11 projects spanning NLP (Neural Machine Translation, RNN/GRU Language Modelling),
+Computer Vision (Autonomous Vehicle, Smart Glass, Face Recognition),
+and Machine Learning (Chess Engine with RL, Spotify Hit Predictor).
+
+## Links
+
+- [Portfolio](https://www.vaikunthguruswamy.uk)
+- [LinkedIn](https://linkedin.com/in/vaikunth-guruswamy)
+- [GitHub](https://github.com/vaikunthgc)
