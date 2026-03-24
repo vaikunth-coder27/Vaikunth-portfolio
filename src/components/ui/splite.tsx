@@ -24,6 +24,10 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
       // Remap full-screen mouse position proportionally into canvas coordinate space
       // so Three.js computes the same NDC as if the cursor were inside the canvas
       const rect = canvas.getBoundingClientRect()
+
+      // Don't drive Spline when the canvas is off-screen (avoids weird pose on scroll-back)
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return
+
       const mappedX = rect.left + (e.clientX / window.innerWidth) * rect.width
       const mappedY = rect.top + (e.clientY / window.innerHeight) * rect.height
 

@@ -8,7 +8,7 @@ export function Contact() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="contact" className="relative py-24 md:py-40 px-5 md:px-6 bg-black overflow-hidden">
+    <section id="contact" className="relative py-24 md:py-40 px-5 md:px-6 bg-background overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(6,182,212,0.05),transparent)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_30%_60%,rgba(139,92,246,0.04),transparent)] pointer-events-none" />
@@ -19,7 +19,7 @@ export function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-8">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-8">
             08 — Contact
           </p>
         </motion.div>
@@ -29,7 +29,7 @@ export function Contact() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.1 }}
-          className="text-[clamp(2.5rem,8vw,7rem)] font-serif italic font-semibold text-white leading-[0.9] mb-4"
+          className="text-[clamp(2.5rem,8vw,7rem)] font-serif italic font-semibold text-p-text leading-[0.9] mb-4"
           style={{ fontFamily: 'var(--font-cormorant)' }}
         >
           Let&apos;s build
@@ -55,7 +55,7 @@ export function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.3 }}
-          className="text-neutral-500 text-base font-light max-w-lg mx-auto mb-12 leading-relaxed"
+          className="text-p-text-4 text-base font-light max-w-lg mx-auto mb-12 leading-relaxed"
         >
           Whether it&apos;s a research collaboration, a full-time role, or an ambitious
           AI project — I&apos;m always open to a conversation.
@@ -70,14 +70,14 @@ export function Contact() {
         >
           <a
             href="mailto:vaikunthgc@gmail.com"
-            className="group flex items-center justify-center gap-3 min-h-[52px] px-6 rounded-full bg-white text-black font-medium hover:bg-neutral-100 transition-all duration-300 text-sm tracking-wide"
+            className="group flex items-center justify-center gap-3 min-h-[52px] px-6 rounded-full bg-p-text text-background font-medium hover:opacity-90 transition-all duration-300 text-sm tracking-wide"
           >
             <span>vaikunthgc@gmail.com</span>
-            <span className="text-neutral-500 group-hover:translate-x-1 transition-transform">→</span>
+            <span className="opacity-60 group-hover:translate-x-1 transition-transform">→</span>
           </a>
           <a
             href="tel:+447407446796"
-            className="flex items-center justify-center min-h-[52px] px-6 rounded-full border border-white/15 text-neutral-400 hover:text-white hover:border-white/30 transition-all duration-300 text-sm font-light tracking-wide"
+            className="flex items-center justify-center min-h-[52px] px-6 rounded-full border border-p-border text-p-text-3 hover:text-p-text hover:border-p-border transition-all duration-300 text-sm font-light tracking-wide"
           >
             +44 7407 446796
           </a>
@@ -90,7 +90,7 @@ export function Contact() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="flex items-center justify-center gap-4 md:gap-6"
         >
-          <div className="h-px w-12 md:w-16 bg-white/10" />
+          <div className="h-px w-12 md:w-16 bg-p-border" />
           {[
             { label: 'LinkedIn', href: 'https://linkedin.com/in/vaikunth-guruswamy' },
             { label: 'GitHub', href: 'https://github.com/vaikunthgc' },
@@ -100,12 +100,12 @@ export function Contact() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-2 text-sm text-neutral-600 hover:text-white font-mono tracking-wider transition-colors duration-200"
+              className="px-3 py-2 text-sm text-p-text-5 hover:text-p-text font-mono tracking-wider transition-colors duration-200"
             >
               {link.label}
             </a>
           ))}
-          <div className="h-px w-12 md:w-16 bg-white/10" />
+          <div className="h-px w-12 md:w-16 bg-p-border" />
         </motion.div>
       </div>
     </section>

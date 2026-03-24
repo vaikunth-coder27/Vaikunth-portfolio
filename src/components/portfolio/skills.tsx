@@ -33,8 +33,8 @@ function MarqueeRow({
   return (
     <div className="relative flex overflow-hidden group">
       {/* Fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
       <motion.div
         className="flex gap-3 whitespace-nowrap"
@@ -45,9 +45,9 @@ function MarqueeRow({
         {doubled.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="inline-flex items-center gap-2 border border-white/8 rounded-full px-5 py-2 text-sm text-neutral-400 bg-white/[0.02] font-light tracking-wide hover:border-white/20 hover:text-white transition-all duration-300 cursor-default whitespace-nowrap"
+            className="inline-flex items-center gap-2 border border-p-border-subtle rounded-full px-5 py-2 text-sm text-p-text-3 bg-p-surface font-light tracking-wide hover:border-p-border hover:text-p-text-2 transition-all duration-300 cursor-default whitespace-nowrap"
           >
-            <span className="w-1 h-1 rounded-full bg-neutral-700" />
+            <span className="w-1 h-1 rounded-full bg-p-text-5" />
             {item}
           </span>
         ))}
@@ -61,7 +61,7 @@ export function Skills() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="skills" className="relative py-16 md:py-32 bg-black overflow-hidden">
+    <section id="skills" className="relative py-16 md:py-32 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <motion.div
           ref={ref}
@@ -69,11 +69,11 @@ export function Skills() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <p className="font-mono text-xs text-neutral-600 tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             04 — Skills
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-white leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             The tools I
@@ -111,21 +111,21 @@ export function Skills() {
               count: '16',
               examples: 'Python · PyTorch · TensorFlow · OpenCV · scikit-learn',
               color: 'border-cyan-500/20 bg-cyan-500/5',
-              accent: 'text-cyan-400',
+              accent: 'text-cyan-500 dark:text-cyan-400',
             },
             {
               label: 'AI Specializations',
               count: '11',
               examples: 'LLMs · NLP · Computer Vision · RAG · Agentic AI',
               color: 'border-purple-500/20 bg-purple-500/5',
-              accent: 'text-purple-400',
+              accent: 'text-purple-500 dark:text-purple-400',
             },
             {
               label: 'Cloud & DevOps',
               count: '5',
               examples: 'Docker · Azure · AWS · HPC · MySQL',
               color: 'border-emerald-500/20 bg-emerald-500/5',
-              accent: 'text-emerald-400',
+              accent: 'text-emerald-500 dark:text-emerald-400',
             },
           ].map((cat) => (
             <div
@@ -139,11 +139,11 @@ export function Skills() {
                 >
                   {cat.count}
                 </span>
-                <span className="text-xs font-mono text-neutral-600 tracking-wider uppercase">
+                <span className="text-xs font-mono text-p-text-5 tracking-wider uppercase">
                   {cat.label}
                 </span>
               </div>
-              <p className="text-neutral-500 text-xs font-mono leading-relaxed">{cat.examples}</p>
+              <p className="text-p-text-4 text-xs font-mono leading-relaxed">{cat.examples}</p>
             </div>
           ))}
         </motion.div>
