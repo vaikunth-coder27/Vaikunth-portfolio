@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, JetBrains_Mono, Cormorant_Garamond } from "next/font
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import { PersonJsonLd } from "@/components/JsonLd";
+import { PersonJsonLd, FaqJsonLd } from "@/components/JsonLd";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -106,6 +106,7 @@ export default function RootLayout({
     >
       <head>
         <PersonJsonLd />
+        <FaqJsonLd />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('portfolio-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})()`,
