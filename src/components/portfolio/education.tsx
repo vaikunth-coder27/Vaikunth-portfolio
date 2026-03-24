@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, Fragment } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { education } from '@/lib/data'
 
@@ -65,7 +65,7 @@ export function Education() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_72px_1fr] gap-0">
 
           {entries.map((edu, i) => (
-            <>
+            <Fragment key={edu.institution}>
               {/* Mobile separator between entries */}
               {i === 1 && (
                 <div key="mobile-sep" className="md:hidden h-px bg-p-border-subtle my-14" />
@@ -181,7 +181,7 @@ export function Education() {
                   </div>
                 </div>
               </motion.div>
-            </>
+            </Fragment>
           ))}
         </div>
 
