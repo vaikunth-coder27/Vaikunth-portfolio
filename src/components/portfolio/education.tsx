@@ -4,35 +4,36 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { education } from '@/lib/data'
 
-const universityImages: Record<string, string> = {
-  'The University of Edinburgh': '/University of Edinburgh.png',
-  'Anna University': '/anna university.png',
-}
+const entries = [
+  {
+    ...education[0],
+    imageSrc: '/University of Edinburgh.png',
+    gradeDisplay: '82%',
+    gradeSub: 'MSc Distinction',
+    gradeGradient: 'linear-gradient(135deg, #818cf8, #6366f1)',
+    nameGradient: 'linear-gradient(135deg, #a5b4fc, #818cf8)',
+    accentRgb: '129,140,248',
+  },
+  {
+    ...education[1],
+    imageSrc: '/anna university.png',
+    gradeDisplay: '9.5',
+    gradeSub: 'CGPA / 10.0',
+    gradeGradient: 'linear-gradient(135deg, #fb923c, #f43f5e)',
+    nameGradient: 'linear-gradient(135deg, #fda4af, #fb923c)',
+    accentRgb: '251,146,60',
+  },
+]
 
 export function Education() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
-  const cards = [
-    {
-      ...education[0],
-      gradient: 'from-blue-500 via-indigo-500 to-purple-600',
-      glow: 'rgba(99,102,241,0.08)',
-      accentColor: 'text-indigo-500 dark:text-indigo-400',
-      borderAccent: 'border-indigo-500/20',
-    },
-    {
-      ...education[1],
-      gradient: 'from-orange-400 via-red-500 to-rose-600',
-      glow: 'rgba(239,68,68,0.06)',
-      accentColor: 'text-rose-500 dark:text-rose-400',
-      borderAccent: 'border-rose-500/20',
-    },
-  ]
-
   return (
     <section id="education" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
+
+        {/* Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 32 }}
@@ -43,7 +44,7 @@ export function Education() {
             05 — Education
           </p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-16 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Foundations of
@@ -57,91 +58,133 @@ export function Education() {
               excellence.
             </span>
           </h2>
+          <div className="mt-10 mb-14 h-px bg-gradient-to-r from-p-border via-p-border-subtle to-transparent" />
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-4">
-          {cards.map((edu, i) => (
-            <motion.div
-              key={edu.institution}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.1 + i * 0.12 }}
-              className="relative rounded-2xl border border-p-border-subtle bg-p-surface overflow-hidden"
-            >
-              {/* Gradient top bar */}
-              <div className={`h-1 w-full bg-gradient-to-r ${edu.gradient}`} />
+        {/* Two-column split */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_72px_1fr] gap-0">
 
-              {/* University image — left half only, fades to transparent at its right edge */}
-              <div
-                className="hidden md:block absolute left-0 top-1 bottom-0 w-1/2"
-                style={{
-                  maskImage: 'linear-gradient(to right, black 0%, black 60%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to right, black 0%, black 60%, transparent 100%)',
-                }}
-              >
-                <img
-                  src={universityImages[edu.institution]}
-                  alt={edu.institution}
-                  className="w-full h-full object-cover object-left dark:opacity-70 opacity-40"
-                />
-              </div>
+          {entries.map((edu, i) => (
+            <>
+              {/* Mobile separator between entries */}
+              {i === 1 && (
+                <div key="mobile-sep" className="md:hidden h-px bg-p-border-subtle my-14" />
+              )}
 
-              {/* Glow */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse 80% 40% at 50% 0%, ${edu.glow}, transparent)` }}
-              />
-
-              {/* Content — starts from center on desktop */}
-              <div className="relative z-10 px-8 py-5 md:pl-[50%]">
-                {/* Top row: period + grade */}
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-block font-mono text-xs text-p-text-5 border border-p-border-subtle rounded-full px-3 py-1 tracking-wider">
-                    {edu.period}
+              {/* Vertical divider (desktop) */}
+              {i === 1 && (
+                <motion.div
+                  key="divider"
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="hidden md:flex flex-col items-center"
+                >
+                  <div className="flex-1 w-px bg-p-border-subtle" />
+                  <span
+                    className="font-mono text-xs py-5 select-none"
+                    style={{ color: `rgba(${entries[0].accentRgb},0.3)` }}
+                  >
+                    ✦
                   </span>
-                  <div className={`inline-flex items-center gap-2 border ${edu.borderAccent} rounded-full px-3 py-1`}
-                    style={{ background: `${edu.glow.replace('0.06', '0.05').replace('0.08', '0.06')}` }}>
-                    <span className={`text-sm font-serif italic font-semibold ${edu.accentColor}`}
-                      style={{ fontFamily: 'var(--font-cormorant)' }}>
+                  <div className="flex-1 w-px bg-p-border-subtle" />
+                </motion.div>
+              )}
+
+              <motion.div
+                key={edu.institution}
+                initial={{ opacity: 0, y: 40 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                  delay: 0.15 + i * 0.18,
+                }}
+                className="relative flex flex-col pt-40"
+              >
+                {/* ── University image — atmospheric background, not a block ── */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-52 pointer-events-none overflow-hidden"
+                  style={{
+                    maskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 100%)',
+                  }}
+                >
+                  <img
+                    src={edu.imageSrc}
+                    alt=""
+                    aria-hidden
+                    className="w-full h-full object-cover object-center dark:opacity-[0.13] opacity-[0.08]"
+                  />
+                </div>
+
+                {/* ── Institution name — hero ── */}
+                <div className="mb-7">
+                  <h3
+                    className="font-serif italic font-semibold leading-tight mb-3"
+                    style={{
+                      fontFamily: 'var(--font-cormorant)',
+                      fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+                      background: edu.nameGradient,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    {edu.institution}
+                  </h3>
+                  <p className="text-p-text-2 font-light text-lg leading-snug mb-3">
+                    {edu.degree}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="font-mono text-xs text-p-text-5 tracking-wide">
+                      {edu.period}
+                    </span>
+                    <span className="text-p-text-5/30 text-xs">·</span>
+                    <span className="font-mono text-xs text-p-text-5 tracking-wide">
+                      {edu.location}
+                    </span>
+                    <span
+                      className="font-mono text-xs px-2.5 py-0.5 rounded-full border"
+                      style={{
+                        borderColor: `rgba(${edu.accentRgb}, 0.3)`,
+                        color: `rgba(${edu.accentRgb}, 0.9)`,
+                        background: `rgba(${edu.accentRgb}, 0.06)`,
+                      }}
+                    >
                       {edu.grade}
                     </span>
                   </div>
                 </div>
 
-                {/* Institution */}
-                <h3
-                  className="text-2xl md:text-3xl font-serif italic font-semibold text-p-text leading-tight mb-1"
-                  style={{ fontFamily: 'var(--font-cormorant)' }}
-                >
-                  {edu.institution}
-                </h3>
+                <div className="h-px bg-p-border-subtle mb-7" />
 
-                {/* Degree */}
-                <p className="text-p-text-3 font-light text-sm mb-0.5">{edu.degree}</p>
-
-                {/* Location */}
-                <p className="text-p-text-5 font-mono text-xs mb-3">{edu.location}</p>
-
-                {/* Courses */}
+                {/* ── Courses as numbered list ── */}
                 <div>
-                  <p className="text-xs font-mono text-p-text-5 tracking-widest uppercase mb-2">
+                  <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-5">
                     Relevant Courses
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {edu.courses.map(course => (
-                      <span
-                        key={course}
-                        className="text-xs border border-p-border-subtle text-p-text-4 px-3 py-1 rounded-full font-mono"
-                      >
-                        {course}
-                      </span>
+                  <div className="flex flex-col gap-3">
+                    {edu.courses.map((course, ci) => (
+                      <div key={course} className="flex items-start gap-4 group">
+                        <span
+                          className="font-mono text-xs flex-shrink-0 mt-0.5 w-5 transition-colors duration-200"
+                          style={{ color: `rgba(${edu.accentRgb}, 0.4)` }}
+                        >
+                          {String(ci + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-sm text-p-text-3 font-light leading-snug group-hover:text-p-text-2 transition-colors duration-200">
+                          {course}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </>
           ))}
         </div>
+
       </div>
     </section>
   )
