@@ -10,6 +10,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: "https://www.vaikunthguruswamy.uk/sitemap.xml",
-    host: "https://www.vaikunthguruswamy.uk",
   };
 }
