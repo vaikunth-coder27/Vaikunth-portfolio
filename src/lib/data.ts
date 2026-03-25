@@ -6,8 +6,8 @@ export const personalInfo = {
   subtitle: "MSc Artificial Intelligence · University of Edinburgh",
   summary:
     "AI-focused researcher with expertise in Machine Learning, Deep Learning, and Natural Language Processing. Skilled in developing and optimizing machine translation models, large-scale multilingual data processing, and deep learning architectures. Strong programming background in Python and C++, with experience in HPC environments.",
-  github: "https://github.com/vaikunthgc",
-  linkedin: "https://linkedin.com/in/vaikunth-guruswamy",
+  github: "https://github.com/vaikunth-coder27",
+  linkedin: "https://www.linkedin.com/in/vaikunth-guruswamy-698b3a1b1/",
 }
 
 export const experience = [
