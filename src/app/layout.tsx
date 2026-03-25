@@ -70,10 +70,11 @@ export const metadata: Metadata = {
       "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK. Expert in Machine Learning, Deep Learning, and NLP.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Vaikunth Guruswamy — AI Researcher & ML Engineer",
+        type: "image/webp",
       },
     ],
   },
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
     title: "Vaikunth Guruswamy — AI Researcher & ML Engineer",
     description:
       "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK.",
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
   },
 };
 
