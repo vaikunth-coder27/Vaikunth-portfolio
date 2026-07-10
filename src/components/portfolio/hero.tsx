@@ -66,10 +66,10 @@ export function Hero() {
             {...fadeUp(0.4)}
             className="text-xs md:text-sm font-mono text-p-text-5 tracking-[0.15em] uppercase leading-relaxed"
           >
-            AI Researcher &nbsp;·&nbsp; ML Engineer
-            <br className="sm:hidden" />
+            AI Engineer &nbsp;·&nbsp; MLOps Engineer
+            {/* <br className="sm:hidden" />
             <span className="hidden sm:inline"> &nbsp;·&nbsp; </span>
-            NLP Specialist
+             */}
           </motion.p>
 
           {/* Tagline */}

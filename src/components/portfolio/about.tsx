@@ -5,18 +5,17 @@ import { motion, useInView } from 'framer-motion'
 
 const stats = [
   { value: '82%', label: 'MSc Distinction', sub: 'University of Edinburgh' },
+  { value: '15+', label: 'Production Systems', sub: 'Built & shipped 0→1' },
   { value: '9.5', label: 'BE CGPA / 10', sub: 'Anna University' },
-  { value: '6+', label: 'AI Projects', sub: 'End-to-end delivery' },
-  { value: '3+', label: 'Years Research', sub: 'ML & Deep Learning' },
 ]
 
 const specializations = [
-  { name: 'Machine Learning', color: '#22d3ee' },
-  { name: 'Natural Language Processing', color: '#818cf8' },
+  { name: 'Large Language Models', color: '#22d3ee' },
   { name: 'Computer Vision', color: '#34d399' },
-  { name: 'Large Language Models', color: '#f472b6' },
-  { name: 'Transformers', color: '#fb923c' },
-  { name: 'Generative AI', color: '#a78bfa' },
+  { name: 'Generative AI', color: '#fb923c' },
+  { name: 'LLMOps', color: '#818cf8' },
+  { name: 'DevOps & Azure Cloud', color: '#a78bfa' },
+  { name: 'Azure AI Foundry', color: '#f472b6' },
 ]
 
 export function About() {
@@ -46,7 +45,7 @@ export function About() {
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
-            The mind behind
+            A little
             <br />
             <span style={{
               background: 'linear-gradient(135deg, #22d3ee, #818cf8)',
@@ -54,7 +53,7 @@ export function About() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              the machine.
+              about me.
             </span>
           </h2>
 
@@ -85,32 +84,42 @@ export function About() {
                 className="text-[1.65rem] md:text-[2.05rem] font-serif italic leading-[1.38] text-p-text-2"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
-                "I don't just build models — I{' '}
+                "I like building AI that makes it{' '}
                 <span className="text-cyan-400 dark:text-cyan-400" style={{ color: '#22d3ee' }}>
-                  architect systems
+                  out of the notebook
                 </span>{' '}
-                that push the{' '}
+                and into the real world — and I care as much about how it holds up there as{' '}
                 <span style={{
                   background: 'linear-gradient(135deg, #22d3ee, #818cf8)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                 }}>
-                  frontier
-                </span>{' '}
-                of what machines can understand, perceive, and generate."
+                  how it looks on paper
+                </span>
+                ."
               </blockquote>
             </div>
 
             {/* Bio */}
-            <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light max-w-2xl">
-              AI-focused researcher with deep expertise in Machine Learning, Deep Learning,
-              and Natural Language Processing. I thrive at the intersection of rigorous academic
-              research and real-world engineering — from collaborating with{' '}
-              <span className="text-p-text-3 font-normal">Amazon</span>{' '}
-              on LLM copyright analysis to building autonomous vehicles and neural machine
-              translation systems.
-            </p>
+            <div className="flex flex-col gap-5 max-w-2xl">
+              <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light">
+                I&apos;m an AI engineer with a Master&apos;s in Artificial Intelligence from the{' '}
+                <span className="text-p-text-3 font-normal">University of Edinburgh</span>, where I
+                focused on machine learning, natural language processing, and large language models.
+                I enjoy taking ideas from research through to production — designing and deploying
+                LLM, computer-vision, and forecasting systems — and working across the full stack,
+                from data and backend to cloud and MLOps. My dissertation, in collaboration with{' '}
+                <span className="text-p-text-3 font-normal">Amazon</span>, explored privacy in large
+                language models.
+              </p>
+              <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light">
+                What interests me most is the intersection of applied AI and thoughtful
+                engineering — building intelligent systems that are reliable, genuinely useful, and
+                a pleasure to use. If you&apos;re exploring similar ideas or think we might be a good
+                fit to work together, I&apos;d be glad to connect.
+              </p>
+            </div>
 
             {/* Specializations — colored indicator dots */}
             <div>
@@ -220,7 +229,7 @@ export function About() {
                     <p className="text-xs font-mono text-p-text-5 mt-0.5">Aug 2019 – Jun 2023</p>
                     <span
                       className="inline-block mt-2 text-xs font-mono px-2.5 py-0.5 rounded-full border"
-                      style={{ borderColor: 'rgba(251,113,133,0.3)', color: '#fb7185', background: 'rgba(251,113,133,0.06)' }}
+                      style={{ borderColor: 'rgba(129,140,248,0.3)', color: '#818cf8', background: 'rgba(129,140,248,0.06)' }}
                     >
                       CGPA 9.50 / 10
                     </span>

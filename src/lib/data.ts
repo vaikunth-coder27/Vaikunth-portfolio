@@ -1,16 +1,37 @@
+// Portfolio content — Vaikunth Guruswamy
 export const personalInfo = {
   name: "Vaikunth Guruswamy",
   email: "vaikunthgc@gmail.com",
   phone: "+44 7407446796",
-  title: "AI Researcher & ML Engineer",
+  title: "AI Engineer & ML Engineer",
   subtitle: "MSc Artificial Intelligence · University of Edinburgh",
   summary:
-    "AI-focused researcher with expertise in Machine Learning, Deep Learning, and Natural Language Processing. Skilled in developing and optimizing machine translation models, large-scale multilingual data processing, and deep learning architectures. Strong programming background in Python and C++, with experience in HPC environments.",
+    "AI engineer who ships production LLM, computer-vision, and forecasting systems end-to-end. As the founding software engineer at a UK manufacturer, established its software foundation and delivered a range of production AI and full-stack systems — from multi-agent AI pipelines, an LLM payroll assistant, and PCB-defect computer vision to the serverless Azure platform they run on. Comfortable across the stack — LLMOps, backend, cloud, and DevOps — with an MSc in AI from the University of Edinburgh and an Amazon-collaborated dissertation on LLM privacy.",
   github: "https://github.com/vaikunth-coder27",
   linkedin: "https://www.linkedin.com/in/vaikunth-guruswamy-698b3a1b1/",
 }
 
 export const experience = [
+  {
+    company: "ZOT Engineering Ltd",
+    role: "Software Application Engineer (Founding Engineer)",
+    type: "Full-time · AI & Full-Stack",
+    period: "Aug 2025 – Present",
+    location: "Edinburgh, United Kingdom",
+    description:
+      "Scaled the greenfield foundation into a unified, company-wide ERP platform, deploying 15+ production systems on Microsoft Azure. Delivered a broad range of AI and full-stack capabilities: an LLM-powered payroll assistant (prompt caching, multi-tool orchestration), a privacy-first multi-agent recruitment pipeline, natural-language-to-SQL graph inference, 100+ live executive dashboards, computer-vision PCB-defect detection (RANSAC, DETR, DINOv3, SAM2), LayoutLM document intelligence, and Times-FM demand forecasting. Re-architected the backend into serverless Azure Functions (114+ endpoints), integrated three legacy on-premise ERP systems over an encrypted VPN, and owned DevOps and MLOps end-to-end from cloud infrastructure to production. Took the initiative to build a digital manufacturing-traceability system that logs every production step, reducing paper usage by 80% toward paperless operations, and optimised the report-generation pipeline by re-engineering query structures — cutting execution time from 55 seconds to 3.4 seconds.",
+    tags: ["LLMOps", "Multi-Agent AI", "Computer Vision", "RAG", "MLOps", "Azure", "Python", "Angular"],
+  },
+  {
+    company: "ZOT Engineering Ltd",
+    role: "Software Application Engineer — Intern",
+    type: "Internship · Full-Stack",
+    period: "Feb 2025 – Jul 2025",
+    location: "Edinburgh, United Kingdom",
+    description:
+      "Joined as the company's first software engineer and established its entire technical foundation. Partnered with stakeholders across three business divisions to map manual workflows and convert requirements into well-defined deliverables. Selected the full technology stack, designed the relational database schema, delivered the public company website, and stood up the first ERP modules and analytics dashboards on an Angular 19 SSR frontend and Python REST API. Standardised a secure, reusable path from database to API to UI — with MSAL/JWT authentication, RBAC, CI/CD, and automated testing at 98% coverage — enabling the rapid delivery of every feature that followed.",
+    tags: ["Angular", "Python Flask", "C# WPF", "SQL Server", "MongoDB", "Data Migration", "MSAL"],
+  },
   {
     company: "Amazon",
     role: "Industry Collaborated Dissertation",
@@ -18,8 +39,8 @@ export const experience = [
     period: "Mar 2024 – Aug 2024",
     location: "Edinburgh, United Kingdom",
     description:
-      "Developed methods to analyze copyright issues in various code-based LLMs. Extended the CodeBLEU metric and applied Few-Shot Learning and 8-bit quantization, reducing memorization by 17% while maintaining accuracy. Contributed to enhancing the privacy and robustness of AI code generation.",
-    tags: ["LLMs", "CodeBLEU", "Few-Shot Learning", "8-bit Quantization", "NLP", "Python"],
+      "MSc thesis, in collaboration with Amazon, investigating memorization in code-based large language models — the verbatim reproduction of training data that drives privacy, PII-leakage, and copyright risk. Evaluated encoder-only, decoder-only, and encoder-decoder models (CodeBERT, CodeGPT, CodeT5) on the CodeSearchNet dataset across four languages (Python, Java, JavaScript, Ruby), designed two data-extraction attacks (masked-token and prefix–suffix generation), and proposed an extended CodeBLEU metric with custom AST-based privacy components. Found identifiers and string literals most memorized (up to 79.3% exact match) and that 8-bit quantization reduces exact memorization while preserving code quality. Awarded a distinction (82%).",
+    tags: ["LLM Memorization", "CodeBLEU", "CodeBERT", "CodeT5", "8-bit Quantization", "Few-Shot Learning", "Privacy AI"],
   },
 ]
 

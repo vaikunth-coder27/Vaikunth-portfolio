@@ -17,7 +17,7 @@ export function Footer() {
           <a href="#hero" className="hover:text-p-text-3 transition-colors">Top</a>
           <a href="#projects" className="hover:text-p-text-3 transition-colors">Projects</a>
           <a href="#contact" className="hover:text-p-text-3 transition-colors">Contact</a>
-          <span className="opacity-50">© 2025</span>
+          <span className="opacity-50">© {new Date().getFullYear()}</span>
         </div>
       </div>
     </footer>
