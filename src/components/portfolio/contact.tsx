@@ -92,7 +92,7 @@ export function Contact() {
         >
           <div className="h-px w-12 md:w-16 bg-p-border" />
           {[
-            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vaikunth-guruswamy-698b3a1b1/' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vaikunth-guruswamy/' },
             { label: 'GitHub', href: 'https://github.com/vaikunth-coder27' },
           ].map((link) => (
             <a

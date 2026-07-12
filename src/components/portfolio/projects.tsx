@@ -1,7 +1,7 @@
 'use client'
 
-import { Fragment, useState } from 'react'
-import { motion } from 'framer-motion'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 import {
   featuredProjects,
   projectCatalogue,
@@ -256,6 +256,21 @@ function CatalogueRow({ project }: { project: (typeof projectCatalogue)[number] 
 export function Projects() {
   const [open, setOpen] = useState(false)
 
+  // Auto-expand the catalogue as soon as the trigger appears in the lower part
+  // of the viewport. The -15% bottom rootMargin keeps a small dead zone at the
+  // very bottom edge (so it doesn't fire on a 1px peek) but fires once the
+  // button is comfortably inside the bottom ~quarter of the screen.
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const autoExpanded = useRef(false)
+  const inView = useInView(triggerRef, { margin: '0px 0px -15% 0px' })
+
+  useEffect(() => {
+    if (inView && !autoExpanded.current) {
+      autoExpanded.current = true
+      setOpen(true)
+    }
+  }, [inView])
+
   return (
     <section id="projects" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
       <div className="max-w-6xl mx-auto">
@@ -298,7 +313,7 @@ export function Projects() {
         </div>
 
         {/* Fading-line chevron divider */}
-        <div className="flex items-center gap-5 mt-[clamp(52px,6vw,80px)]">
+        <div ref={triggerRef} className="flex items-center gap-5 mt-[clamp(52px,6vw,80px)]">
           <span className="flex-1 h-px bg-gradient-to-r from-transparent to-p-border" />
           <motion.button
             onClick={() => setOpen((v) => !v)}

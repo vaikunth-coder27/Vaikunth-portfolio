@@ -84,40 +84,48 @@ export function About() {
                 className="text-[1.65rem] md:text-[2.05rem] font-serif italic leading-[1.38] text-p-text-2"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
-                "I like building AI that makes it{' '}
+                "I love building systems{' '}
                 <span className="text-cyan-400 dark:text-cyan-400" style={{ color: '#22d3ee' }}>
-                  out of the notebook
-                </span>{' '}
-                and into the real world, and I care as much about how it holds up there as{' '}
+                  end to end
+                </span>
+                , from the{' '}
                 <span style={{
                   background: 'linear-gradient(135deg, #22d3ee, #818cf8)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                 }}>
-                  how it looks on paper
-                </span>
-                ."
+                  model to the backend to the cloud
+                </span>{' '}
+                it runs on, and watching all the pieces come together into something people rely on."
               </blockquote>
             </div>
 
             {/* Bio */}
             <div className="flex flex-col gap-5 max-w-2xl">
               <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light">
-                I&apos;m an AI engineer with a Master&apos;s in Artificial Intelligence from the{' '}
+                I&apos;m an Founding AI & Software engineer based in Edinburgh, where I build production systems at{' '}
+                <span className="text-p-text-3 font-normal">ZOT Engineering</span>: a full-stack
+                platform and the AI that runs inside it. I hold a Master&apos;s in Artificial
+                Intelligence from the{' '}
                 <span className="text-p-text-3 font-normal">University of Edinburgh</span>, where I
-                focused on machine learning, natural language processing, and large language models.
-                I enjoy taking ideas from research through to production, designing and deploying
-                LLM, computer-vision, and forecasting systems, and working across the full stack,
-                from data and backend to cloud and MLOps. My dissertation, in collaboration with{' '}
-                <span className="text-p-text-3 font-normal">Amazon</span>, explored privacy in large
-                language models.
+                focused on machine learning, NLP, and large language models, and where my
+                dissertation with{' '}
+                <span className="text-p-text-3 font-normal">Amazon</span> explored privacy and
+                memorisation in LLMs.
               </p>
               <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light">
-                What interests me most is the intersection of applied AI and thoughtful
-                engineering: building intelligent systems that are reliable, genuinely useful, and
-                a pleasure to use. If you&apos;re exploring similar ideas or think we might be a good
-                fit to work together, I&apos;d be glad to connect.
+                Most of my work lives at the point where a model stops being an experiment and
+                starts carrying real load. I take ideas from research through to production,
+                building LLM, computer-vision, and forecasting systems along with the full stack
+                around them, from data and backend to cloud and MLOps, so they hold up once
+                people depend on them.
+              </p>
+              <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light">
+                What draws me is the meeting point of applied AI and thoughtful engineering:
+                reliable, robust systems that solve real problems and make everyday work and
+                life run a little smoother. If you&apos;re working on similar ideas, or think we
+                might build something well together, I&apos;d be glad to connect.
               </p>
             </div>
 

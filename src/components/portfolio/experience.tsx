@@ -81,14 +81,26 @@ const experiences: ExperienceEntry[] = [
           },
           {
             lead: 'Backend & cloud infrastructure',
-            detail: 'Re-architected the backend into serverless Azure Functions (114+ endpoints), integrating three legacy on-premise ERP systems over an encrypted VPN with end-to-end CI/CD, owning DevOps and MLOps throughout.',
+            detail: 'Architected the backend serverless Azure Functions (114+ endpoints), integrating three legacy on-premise ERP systems over an encrypted VPN, owning DevOps and MLOps throughout.',
+          },
+          {
+            lead: 'Cloud architecture & FinOps',
+            detail: 'Designed the complete Azure cloud architecture from the ground up, creating and managing resource groups across environments and owning FinOps cost governance to keep spend predictable as the platform scaled.',
+          },
+          {
+            lead: 'CI/CD & developer experience',
+            detail: 'Set up the company’s GitHub organisation, repositories, and GitHub Actions workflows, and standardised local quality gates, ESLint, unit tests, and Cypress E2E, behind automated build, test, and deploy pipelines.',
+          },
+          {
+            lead: 'Observability & reliability',
+            detail: 'Instrumented distributed tracing, monitoring, and alerting across production systems, running ongoing performance evaluations, bug fixes, and improvements to keep the platform fast and dependable.',
           },
           {
             lead: 'Query performance optimisation',
             detail: 'Profiled the report-generation workflow to isolate its bottlenecks and re-engineered the underlying query structures, cutting execution time from 55 seconds to 3.4 seconds, a 16× improvement.',
           },
         ],
-        stack: ['LLMOps', 'Multi-Agent AI', 'NL-to-SQL', 'Computer Vision', 'Forecasting', 'Azure DevOps', '114+ Endpoints'],
+        stack: ['LLMOps', 'Multi-Agent AI', 'NL-to-SQL', 'Computer Vision', 'Forecasting', 'Azure DevOps', 'CI/CD', 'Observability', 'FinOps', '114+ Endpoints'],
       },
       {
         title: 'Software Application Engineer',
@@ -200,6 +212,10 @@ const TECH_TERMS = [
   'Angular 19 SSR', 'Python REST API', 'encrypted VPN', 'end-to-end CI/CD',
   'MSAL/JWT', 'CI/CD', 'DevOps', 'MLOps', 'RBAC', 'RANSAC', 'DETR', 'DINOv3',
   'SAM2', 'LayoutLM', 'Times-FM', 'ClickUp',
+  // Platform / DevOps / infra
+  'Azure cloud architecture', 'GitHub Actions', 'resource groups', 'FinOps',
+  'Cypress E2E', 'Cypress', 'ESLint', 'unit tests', 'distributed tracing',
+  'observability',
   // Thesis / research
   'code-based large language models', 'extended CodeBLEU', 'CodeBLEU',
   'CodeSearchNet', 'CodeBERT', 'CodeGPT', 'CodeT5', '8-bit quantization',
