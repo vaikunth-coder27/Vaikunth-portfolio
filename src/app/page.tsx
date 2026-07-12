@@ -7,6 +7,7 @@ import { Skills } from '@/components/portfolio/skills'
 import { Education } from '@/components/portfolio/education'
 import { Volunteering } from '@/components/portfolio/volunteering'
 import { Recommendations } from '@/components/portfolio/recommendations'
+import { Press } from '@/components/portfolio/press'
 import { Contact } from '@/components/portfolio/contact'
 import { Footer } from '@/components/portfolio/footer'
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Education />
       <Volunteering />
       <Recommendations />
+      <Press />
       <Contact />
       <Footer />
     </main>

@@ -3,71 +3,30 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const row1 = [
-  'Python', 'PyTorch', 'TensorFlow', 'Keras', 'NumPy', 'Pandas',
-  'Scikit-learn', 'OpenCV', 'NLTK', 'spaCy', 'XGBoost', 'C++',
-  'JavaScript', 'SQL', 'MongoDB', 'Flask',
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number]
+
+const skillGroups = [
+  { n: '01', label: 'Languages', items: ['Python', 'TypeScript', 'C++', 'C# / .NET', 'Rust', 'SQL'] },
+  { n: '02', label: 'Deep Learning & AI', items: ['PyTorch', 'TensorFlow', 'Hugging Face Transformers', 'OpenCV', 'ONNX Runtime'] },
+  { n: '03', label: 'LLMs & GenAI', items: ['LangChain', 'RAG Pipelines', 'Vector Databases', 'Azure OpenAI', 'Prompt Engineering'] },
+  { n: '04', label: 'MLOps & Deployment', items: ['MLflow', 'Azure ML', 'Docker', 'Kubernetes', 'CI/CD'] },
+  { n: '05', label: 'Cloud & Databases', items: ['Azure', 'AWS', 'PostgreSQL', 'MongoDB'] },
+  { n: '06', label: 'Web & Tooling', items: ['React', 'Angular', 'Node.js', 'Git', 'Linux'] },
 ]
-
-const row2 = [
-  'Machine Learning', 'Deep Learning', 'Computer Vision', 'NLP',
-  'Large Language Models', 'Transformers', 'Generative AI',
-  'MLOps', 'LLMOps', 'Agentic AI', 'RAG', 'CUDA',
-]
-
-const row3 = [
-  'Docker', 'Azure', 'AWS', 'MySQL', 'HPC', 'Git',
-  'Next.js', 'React', 'Node MCU', 'IBM Cloud', 'Linux', 'Agile',
-]
-
-function MarqueeRow({
-  items,
-  reverse = false,
-  speed = 35,
-}: {
-  items: string[]
-  reverse?: boolean
-  speed?: number
-}) {
-  const doubled = [...items, ...items]
-  return (
-    <div className="relative flex overflow-hidden group">
-      {/* Fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-
-      <motion.div
-        className="flex gap-3 whitespace-nowrap"
-        animate={{ x: reverse ? ['0%', '50%'] : ['-50%', '0%'] }}
-        transition={{ duration: speed, ease: 'linear', repeat: Infinity }}
-        style={{ willChange: 'transform' }}
-      >
-        {doubled.map((item, i) => (
-          <span
-            key={`${item}-${i}`}
-            className="inline-flex items-center gap-2 border border-p-border-subtle rounded-full px-5 py-2 text-sm text-p-text-3 bg-p-surface font-light tracking-wide hover:border-p-border hover:text-p-text-2 transition-all duration-300 cursor-default whitespace-nowrap"
-          >
-            <span className="w-1 h-1 rounded-full bg-p-text-5" />
-            {item}
-          </span>
-        ))}
-      </motion.div>
-    </div>
-  )
-}
 
 export function Skills() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="skills" className="relative py-16 md:py-32 bg-background overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-16">
+    <section id="skills" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
+      <div className="max-w-7xl mx-auto">
+        {/* Section header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+          transition={{ duration: 0.8, ease: EASE }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
             04 — Skills
@@ -76,77 +35,47 @@ export function Skills() {
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
-            The tools I
+            What I
             <br />
-            <span style={{
-              background: 'linear-gradient(135deg, #34d399, #22d3ee)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              command.
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #34d399, #22d3ee)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              work with.
             </span>
           </h2>
+          <div className="mt-10 h-px bg-gradient-to-r from-p-border via-p-border-subtle to-transparent" />
         </motion.div>
-      </div>
 
-      {/* Three marquee rows */}
-      <div className="flex flex-col gap-4">
-        <MarqueeRow items={row1} reverse={false} speed={40} />
-        <MarqueeRow items={row2} reverse={true} speed={30} />
-        <MarqueeRow items={row3} reverse={false} speed={45} />
-      </div>
-
-      {/* Skill category summary */}
-      <div className="max-w-7xl mx-auto px-6 mt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
-        >
-          {[
-            {
-              label: 'Languages & Frameworks',
-              count: '16',
-              examples: 'Python · PyTorch · TensorFlow · OpenCV · scikit-learn',
-              color: 'border-cyan-500/20 bg-cyan-500/5',
-              accent: 'text-cyan-500 dark:text-cyan-400',
-            },
-            {
-              label: 'AI Specializations',
-              count: '11',
-              examples: 'LLMs · NLP · Computer Vision · RAG · Agentic AI',
-              color: 'border-purple-500/20 bg-purple-500/5',
-              accent: 'text-purple-500 dark:text-purple-400',
-            },
-            {
-              label: 'Cloud & DevOps',
-              count: '5',
-              examples: 'Docker · Azure · AWS · HPC · MySQL',
-              color: 'border-emerald-500/20 bg-emerald-500/5',
-              accent: 'text-emerald-500 dark:text-emerald-400',
-            },
-          ].map((cat) => (
-            <div
-              key={cat.label}
-              className={`rounded-2xl border ${cat.color} p-6`}
+        {/* Skill groups — numbered list */}
+        <div className="flex flex-col">
+          {skillGroups.map((g, i) => (
+            <motion.div
+              key={g.n}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease: EASE, delay: 0.15 + i * 0.08 }}
+              className="border-b border-p-border-subtle py-7 md:py-9 flex flex-col gap-y-3 md:grid md:grid-cols-[56px_minmax(0,1fr)_minmax(0,1.6fr)] md:gap-x-8 md:items-baseline"
             >
-              <div className="flex items-baseline gap-2 mb-3">
-                <span
-                  className={`text-4xl font-serif italic font-semibold ${cat.accent}`}
+              <div className="flex items-baseline gap-4 md:contents">
+                <span className="font-mono text-xs text-p-text-5 tracking-wider">{g.n}</span>
+                <h3
+                  className="font-serif italic font-semibold text-2xl md:text-[1.7rem] text-p-text leading-tight"
                   style={{ fontFamily: 'var(--font-cormorant)' }}
                 >
-                  {cat.count}
-                </span>
-                <span className="text-xs font-mono text-p-text-5 tracking-wider uppercase">
-                  {cat.label}
-                </span>
+                  {g.label}
+                </h3>
               </div>
-              <p className="text-p-text-4 text-xs font-mono leading-relaxed">{cat.examples}</p>
-            </div>
+              <p className="font-mono text-sm text-p-text-4 leading-relaxed">
+                {g.items.join(' · ')}
+              </p>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -10,7 +10,7 @@ export function Footer() {
             Vaikunth Guruswamy
           </span>
           <span className="text-p-text-5 text-xs font-mono">·</span>
-          <span className="text-p-text-5 text-xs font-mono">AI Researcher & ML Engineer</span>
+          <span className="text-p-text-5 text-xs font-mono">AI Engineer  ·  MLOps Engineer</span>
         </div>
 
         <div className="flex items-center gap-6 text-xs font-mono text-p-text-5">

@@ -20,7 +20,7 @@ export function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-8">
-            08 — Contact
+            09 — Contact
           </p>
         </motion.div>
 
