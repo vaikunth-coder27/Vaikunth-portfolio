@@ -17,7 +17,7 @@ interface ChatWidgetProps {
 
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
-  content: "Hi! I'm Vaikunth's AI assistant. Ask me anything about his research, projects, skills, or experience — I'm here to help! 🤖",
+  content: "Hi! I'm Vaikunth's AI assistant. Ask me anything about his research, projects, skills, or experience. I'm here to help! 🤖",
 }
 
 function TypingIndicator() {

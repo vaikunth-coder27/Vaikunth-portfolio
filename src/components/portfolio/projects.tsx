@@ -86,7 +86,7 @@ function PipelineFigure({ stages, solid }: { stages: { stage: string; detail: st
   return (
     <div className="rounded-2xl border border-p-border bg-p-surface-veil p-4">
       <div className="flex items-center justify-between mb-4">
-        <span className="font-mono text-[0.6rem] tracking-[0.16em] uppercase text-p-text-5">Fig.01 — System pipeline</span>
+        <span className="font-mono text-[0.6rem] tracking-[0.16em] uppercase text-p-text-5">Fig.01 · System pipeline</span>
         <span className="font-mono text-[0.6rem] text-p-text-5">on-device</span>
       </div>
       <div className="flex items-stretch gap-1.5">
@@ -266,7 +266,7 @@ export function Projects() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">03 — Projects</p>
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">03 / Projects</p>
           <h2
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-6 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
@@ -285,7 +285,7 @@ export function Projects() {
             </span>
           </h2>
           <p className="font-light text-p-text-3 leading-[1.85] max-w-[54ch] text-[1.02rem]">
-            Six flagship builds — spanning NLP, computer vision, robotics and machine learning — each documented end
+            Six flagship builds spanning NLP, computer vision, robotics and machine learning, each documented end
             to end, from method to measured result. Nine more sit in the catalogue below.
           </p>
         </motion.div>

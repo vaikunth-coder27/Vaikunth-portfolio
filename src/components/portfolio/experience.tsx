@@ -50,12 +50,12 @@ const experiences: ExperienceEntry[] = [
     nameGradient: 'linear-gradient(135deg, #38bdf8, #818cf8)',
     accentRgb: '56,189,248',
     pullQuote:
-      '"Founding engineer at a UK manufacturer — built the digital foundation 0→1, then turned it into a platform that ships AI and full-stack features across the business at speed."',
+      '"Founding engineer at a UK manufacturer: built the digital foundation 0→1, then turned it into a platform that ships AI and full-stack features across the business at speed."',
     roles: [
       {
         title: 'Software Application Engineer',
         tagline: 'Founding Engineer',
-        phase: 'Scaling the platform — breadth at velocity',
+        phase: 'Scaling the platform: breadth at velocity',
         period: 'Aug 2025 – Present',
         current: true,
         bullets: [
@@ -77,7 +77,7 @@ const experiences: ExperienceEntry[] = [
           },
           {
             lead: 'Paperless manufacturing initiative',
-            detail: 'Identified the opportunity and delivered end-to-end a production system that digitises and logs every manufacturing step — reducing paper usage by 80% and advancing the company’s transition to environmentally friendly, paperless operations.',
+            detail: 'Identified the opportunity and delivered end-to-end a production system that digitises and logs every manufacturing step, reducing paper usage by 80% and advancing the company’s transition to environmentally friendly, paperless operations.',
           },
           {
             lead: 'Backend & cloud infrastructure',
@@ -85,7 +85,7 @@ const experiences: ExperienceEntry[] = [
           },
           {
             lead: 'Query performance optimisation',
-            detail: 'Profiled the report-generation workflow to isolate its bottlenecks and re-engineered the underlying query structures, cutting execution time from 55 seconds to 3.4 seconds — a 16× improvement.',
+            detail: 'Profiled the report-generation workflow to isolate its bottlenecks and re-engineered the underlying query structures, cutting execution time from 55 seconds to 3.4 seconds, a 16× improvement.',
           },
         ],
         stack: ['LLMOps', 'Multi-Agent AI', 'NL-to-SQL', 'Computer Vision', 'Forecasting', 'Azure DevOps', '114+ Endpoints'],
@@ -115,7 +115,7 @@ const experiences: ExperienceEntry[] = [
           },
           {
             lead: 'Reusable delivery pipeline',
-            detail: 'Standardised a secure path from database to API to UI — with MSAL/JWT authentication, RBAC, CI/CD, and automated testing at 98% coverage — enabling rapid delivery of every feature that followed.',
+            detail: 'Standardised a secure path from database to API to UI, with MSAL/JWT authentication, RBAC, CI/CD, and automated testing at 98% coverage, enabling rapid delivery of every feature that followed.',
           },
         ],
         stack: ['Tech-Stack 0→1', 'Angular 19 SSR', 'Python Flask', 'DB Schema Design', 'CI/CD Pipeline', 'Dashboards'],
@@ -135,15 +135,15 @@ const experiences: ExperienceEntry[] = [
     nameGradient: 'linear-gradient(135deg, #fbbf24, #f97316)',
     accentRgb: '251,191,36',
     pullQuote:
-      '"MSc thesis, in collaboration with Amazon — measuring and mitigating how code-based LLMs memorize their training data, and the privacy and copyright risks it creates."',
+      '"MSc thesis, in collaboration with Amazon: measuring and mitigating how code-based LLMs memorize their training data, and the privacy and copyright risks it creates."',
     bullets: [
       {
         lead: 'Research question',
-        detail: 'Investigated memorization in code-based large language models — the tendency to reproduce training data verbatim, which drives privacy, PII-leakage, and copyright risk in AI code generation. Awarded a distinction (82%).',
+        detail: 'Investigated memorization in code-based large language models, the tendency to reproduce training data verbatim, which drives privacy, PII-leakage, and copyright risk in AI code generation. Awarded a distinction (82%).',
       },
       {
         lead: 'Cross-architecture study',
-        detail: 'Evaluated all three model families — encoder-only, decoder-only, and encoder-decoder (CodeBERT, CodeGPT, CodeT5) — on the CodeSearchNet dataset across four programming languages (Python, Java, JavaScript, Ruby), processing 30,000 samples per language.',
+        detail: 'Evaluated all three model families, encoder-only, decoder-only, and encoder-decoder (CodeBERT, CodeGPT, CodeT5), on the CodeSearchNet dataset across four programming languages (Python, Java, JavaScript, Ruby), processing 30,000 samples per language.',
       },
       {
         lead: 'Novel evaluation methodology',
@@ -376,7 +376,7 @@ export function Experience() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
-            02 — Experience
+            02 / Experience
           </p>
           <h2
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"

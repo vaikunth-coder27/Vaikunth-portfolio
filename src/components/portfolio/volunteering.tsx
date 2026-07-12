@@ -20,11 +20,11 @@ const roles = [
     highlights: [
       {
         label: 'Electrofocus 2022',
-        text: 'Ideated and organized a national-level Technical Symposium with 132 event coordinators across 14 events and 6 workshops — drawing 1,400+ participants.',
+        text: 'Ideated and organized a national-level Technical Symposium with 132 event coordinators across 14 events and 6 workshops, drawing 1,400+ participants.',
       },
       {
         label: 'Apocalypse 2021',
-        text: 'Organized an intra-college Technical Symposium with 40+ coordinators and volunteers across 21 events and 3 workshops — 400+ participants.',
+        text: 'Organized an intra-college Technical Symposium with 40+ coordinators and volunteers across 21 events and 3 workshops, with 400+ participants.',
       },
       {
         label: 'Finance & Audit',
@@ -52,7 +52,7 @@ const roles = [
       },
       {
         label: 'Swatchtha Bot',
-        text: "Led the technical team for the association's annual flagship project — a fully functional waste-collection robot.",
+        text: "Led the technical team for the association's annual flagship project: a fully functional waste-collection robot.",
       },
       {
         label: 'DEXBOT Competition',
@@ -78,7 +78,7 @@ export function Volunteering() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
-            06 — Volunteering
+            06 / Volunteering
           </p>
           <h2
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"

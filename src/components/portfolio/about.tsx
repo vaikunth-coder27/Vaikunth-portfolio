@@ -39,7 +39,7 @@ export function About() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
-            01 — About
+            01 / About
           </p>
           <h2
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"
@@ -88,7 +88,7 @@ export function About() {
                 <span className="text-cyan-400 dark:text-cyan-400" style={{ color: '#22d3ee' }}>
                   out of the notebook
                 </span>{' '}
-                and into the real world — and I care as much about how it holds up there as{' '}
+                and into the real world, and I care as much about how it holds up there as{' '}
                 <span style={{
                   background: 'linear-gradient(135deg, #22d3ee, #818cf8)',
                   WebkitBackgroundClip: 'text',
@@ -107,15 +107,15 @@ export function About() {
                 I&apos;m an AI engineer with a Master&apos;s in Artificial Intelligence from the{' '}
                 <span className="text-p-text-3 font-normal">University of Edinburgh</span>, where I
                 focused on machine learning, natural language processing, and large language models.
-                I enjoy taking ideas from research through to production — designing and deploying
-                LLM, computer-vision, and forecasting systems — and working across the full stack,
+                I enjoy taking ideas from research through to production, designing and deploying
+                LLM, computer-vision, and forecasting systems, and working across the full stack,
                 from data and backend to cloud and MLOps. My dissertation, in collaboration with{' '}
                 <span className="text-p-text-3 font-normal">Amazon</span>, explored privacy in large
                 language models.
               </p>
               <p className="text-p-text-4 text-base md:text-[1.05rem] leading-[1.9] font-light">
                 What interests me most is the intersection of applied AI and thoughtful
-                engineering — building intelligent systems that are reliable, genuinely useful, and
+                engineering: building intelligent systems that are reliable, genuinely useful, and
                 a pleasure to use. If you&apos;re exploring similar ideas or think we might be a good
                 fit to work together, I&apos;d be glad to connect.
               </p>
@@ -205,7 +205,7 @@ export function About() {
                       className="inline-block mt-2 text-xs font-mono px-2.5 py-0.5 rounded-full border"
                       style={{ borderColor: 'rgba(129,140,248,0.3)', color: '#818cf8', background: 'rgba(129,140,248,0.06)' }}
                     >
-                      Distinction — 82%
+                      Distinction · 82%
                     </span>
                   </div>
                 </div>

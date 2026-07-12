@@ -29,7 +29,7 @@ export function Skills() {
           transition={{ duration: 0.8, ease: EASE }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
-            04 — Skills
+            04 / Skills
           </p>
           <h2
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"
