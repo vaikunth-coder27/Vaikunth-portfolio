@@ -10,14 +10,14 @@ export function Footer() {
             Vaikunth Guruswamy
           </span>
           <span className="text-p-text-5 text-xs font-mono">·</span>
-          <span className="text-p-text-5 text-xs font-mono">AI Researcher & ML Engineer</span>
+          <span className="text-p-text-5 text-xs font-mono">AI Engineer  ·  MLOps Engineer</span>
         </div>
 
         <div className="flex items-center gap-6 text-xs font-mono text-p-text-5">
           <a href="#hero" className="hover:text-p-text-3 transition-colors">Top</a>
           <a href="#projects" className="hover:text-p-text-3 transition-colors">Projects</a>
           <a href="#contact" className="hover:text-p-text-3 transition-colors">Contact</a>
-          <span className="opacity-50">© 2025</span>
+          <span className="opacity-50">© {new Date().getFullYear()}</span>
         </div>
       </div>
     </footer>

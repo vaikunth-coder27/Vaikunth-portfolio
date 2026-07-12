@@ -94,8 +94,8 @@ export function PersonJsonLd() {
       "Azure",
     ],
     sameAs: [
-      "https://linkedin.com/in/vaikunth-guruswamy",
-      "https://github.com/vaikunthgc",
+      "https://www.linkedin.com/in/vaikunth-guruswamy-698b3a1b1/",
+      "https://github.com/vaikunth-coder27",
     ],
   };
 

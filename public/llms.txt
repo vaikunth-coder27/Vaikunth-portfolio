@@ -1,42 +1,95 @@
 # Vaikunth Guruswamy
 
-> AI Researcher and ML Engineer based in the UK. MSc Artificial Intelligence (Distinction, 82%)
-> from the University of Edinburgh. Currently Full-Stack Software Engineer at ZOT, UK.
-> Specialising in Machine Learning, Deep Learning, NLP, LLMs, and full-stack web development.
+> Vaikunth Guruswamy is an AI Researcher and ML Engineer based in the United Kingdom. He holds an
+> MSc in Artificial Intelligence with Distinction (82%) from the University of Edinburgh and is
+> currently a Full-Stack Software Engineer at ZOT, UK, specialising in Machine Learning, Deep
+> Learning, NLP, LLMs, and cloud-native full-stack development.
 
-## About
+## Identity
 
-Vaikunth Guruswamy is an AI-focused engineer with hands-on experience building production ML
-systems, full-stack applications, and cloud infrastructure. His work spans research-grade deep
-learning (Amazon collaboration on LLM memorisation) to deployed enterprise software (ERP, ATS,
-and Azure cloud platforms at ZOT).
+Vaikunth Guruswamy (also written as Vaikunth G C) is a software and AI engineer originally from
+Chennai, India, now based in the United Kingdom. He combines academic excellence in AI research
+with practical engineering experience across enterprise software, cloud infrastructure, and applied
+machine learning.
 
-## Experience
+## Current Role
 
-- Full-Stack Software Engineer — ZOT, UK (Feb 2025 – Present)
-  Built production Angular 19 + Python/Azure ERP with AI-native features, RBAC, and SSO.
-- Industry Collaborated Dissertation — Amazon (Mar 2024 – Aug 2024)
-  Reduced LLM memorisation by 17% using Few-Shot Learning and 8-bit quantisation.
+Vaikunth is a Full-Stack Software Engineer at ZOT (PCB Manufacturing), UK, since
+February 2025. He has end-to-end ownership of a production-grade platform including an Angular 19
+SSR/PWA customer website, a Python serverless ERP backend on Azure Functions, and AI-native
+features including a GDPR-compliant AI-powered Applicant Tracking System (ATS), natural language
+to SQL chart recommendations, and Azure AI Foundry integrations. He also built a payroll engine,
+secure RBAC, MSAL SSO, JWT, and AES-encrypted API payloads.
+
+## Research Experience
+
+Vaikunth conducted an industry-collaborated MSc dissertation with Amazon (March–August 2024). His
+research analysed copyright and memorisation issues in code-based Large Language Models. He
+extended the CodeBLEU metric and applied Few-Shot Learning with 8-bit quantisation, achieving a
+17% reduction in LLM memorisation while maintaining model accuracy. This work contributes to
+improving privacy and robustness in AI code generation systems.
 
 ## Education
 
-- MSc Artificial Intelligence — University of Edinburgh (2023–2024), 82% Distinction
-- BE Electronics and Communication — Anna University (2019–2023), CGPA 9.50/10
+Vaikunth Guruswamy earned his MSc in Artificial Intelligence from the University of Edinburgh
+(September 2023 – August 2024), graduating with Distinction at 82%, with a Distinction in his
+thesis. His coursework included NLP (Transformers & LLMs), Machine Learning, Computer Vision,
+Cloud Programming (Docker, Azure), Data Visualisation, and AI Ethics.
 
-## Key Skills
+He completed his Bachelor of Engineering in Electronics and Communication Engineering at Anna
+University, Chennai, India (August 2019 – June 2023), achieving a CGPA of 9.50 out of 10. His
+coursework included Data Structures & Algorithms, AI and ML, Software Engineering (Agile), and
+Data Science.
 
-Machine Learning, Deep Learning, Natural Language Processing, Large Language Models, Transformers,
-Computer Vision, Generative AI, LLMOps, Python, PyTorch, TensorFlow, React, Angular, Next.js,
-TypeScript, Azure, Docker, PostgreSQL.
+## Technical Skills
 
-## Projects
+Vaikunth is proficient in Python, C++, JavaScript, TypeScript, and SQL. His ML stack includes
+PyTorch, TensorFlow, Keras, Scikit-learn, NumPy, Pandas, OpenCV, NLTK, spaCy, and XGBoost. He
+specialises in Machine Learning, Deep Learning, Computer Vision, Natural Language Processing,
+Large Language Models, Transformers, Generative AI, MLOps, LLMOps, Agentic AI, and RAG systems.
+On the infrastructure side he works with Azure, AWS, Docker, PostgreSQL, and CI/CD pipelines.
 
-11 projects spanning NLP (Neural Machine Translation, RNN/GRU Language Modelling),
-Computer Vision (Autonomous Vehicle, Smart Glass, Face Recognition),
-and Machine Learning (Chess Engine with RL, Spotify Hit Predictor).
+## Notable Projects
 
-## Links
+- **Attention-based Neural Machine Translation**: LSTM and Transformer multi-head attention model
+  for German-English translation, evaluated with BLEU Score.
+- **Level 4 Autonomous Vehicle Prototype**: Neural network for traffic sign and lane detection
+  using Spatial CNN, YOLO v3, DarkNet-53, and DQN reinforcement learning. Achieved 1ms response
+  time for obstacle detection.
+- **LLM Memorisation Research (Amazon)**: Extended CodeBLEU and applied Few-Shot Learning with
+  8-bit quantisation; 17% memorisation reduction without accuracy loss.
+- **RNN & GRU Language Modelling**: Compared GRU vs RNN architectures for subject-verb agreement
+  tasks using PyTorch.
+- **Chess Engine with Reinforcement Learning**: DQN-based chess engine with PyQt5 GUI.
+- **Smart Glass Assistant**: Wearable real-time object detection, navigation, chatbot, and
+  translation device using OpenCV and IoT.
+- **Spotify Hit Song Predictor**: ML classification models using Scikit-learn to predict hit songs.
+- **Face Detection & Recognition System**: Haarcascade-based attendance system with OTP email
+  verification using OpenCV.
 
-- [Portfolio](https://www.vaikunthguruswamy.uk)
-- [LinkedIn](https://linkedin.com/in/vaikunth-guruswamy)
-- [GitHub](https://github.com/vaikunthgc)
+## Professional Recommendations
+
+Gordon Falconer, Director of Zot Engineering Ltd, describes Vaikunth as "a dedicated and very
+talented software engineer" who has "quickly established himself as a key and valuable member of
+the Zot team," highlighting his strong problem-solving skills, creativity, and initiative.
+
+Christos Christodoulopoulos, Principal Technology Adviser at the ICO and Vaikunth's MSc research
+advisor at Amazon, states: "He immersed himself into the relevant literature, and even in our
+first project meeting had done some preliminary experimentation. He continued at the same pace
+throughout the project, combining his hard work with innovative ideas that challenged existing
+approaches in the literature."
+
+## Leadership & Volunteering
+
+Vaikunth served as Secretary of the Electronics Engineers Association at Anna University
+(2021–2022), organising Electrofocus 2022, a national technical symposium with over 1,400
+participants and 132 coordinators across 14 events. He also led the Technical Team of the MIT
+Robotics Association, delivering keynotes on ML, Deep Learning, ROS, and Reinforcement Learning,
+and engineering the Swatchtha Bot, an autonomous waste-collection robot.
+
+## Contact & Links
+
+- Website: https://www.vaikunthguruswamy.uk
+- Email: vaikunthgc@gmail.com
+- LinkedIn: https://www.linkedin.com/in/vaikunth-guruswamy-698b3a1b1/
+- GitHub: https://github.com/vaikunth-coder27

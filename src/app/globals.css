@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --color-p-bg: var(--p-bg);
   --color-p-surface: var(--p-surface);
+  --color-p-surface-veil: var(--p-surface-veil);
   --color-p-border: var(--p-border);
   --color-p-border-subtle: var(--p-border-subtle);
   --color-p-text: var(--p-text);

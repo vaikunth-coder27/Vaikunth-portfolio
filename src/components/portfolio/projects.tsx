@@ -1,239 +1,274 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { projects } from '@/lib/data'
+import { Fragment, useState } from 'react'
+import { motion } from 'framer-motion'
+import {
+  featuredProjects,
+  projectCatalogue,
+  projectCategories,
+  type FeaturedProject,
+  type ProjectChart,
+  type CategoryKey,
+} from '@/lib/data'
 
-const categoryColors: Record<string, string> = {
-  NLP: 'text-cyan-500 dark:text-cyan-400 border-cyan-500/20 bg-cyan-500/5',
-  'Computer Vision': 'text-purple-500 dark:text-purple-400 border-purple-500/20 bg-purple-500/5',
-  'Machine Learning': 'text-emerald-500 dark:text-emerald-400 border-emerald-500/20 bg-emerald-500/5',
-  'Embedded Systems': 'text-amber-500 dark:text-amber-400 border-amber-500/20 bg-amber-500/5',
-}
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
-const gradients = [
-  'from-cyan-500/10 to-blue-500/5',
-  'from-purple-500/10 to-pink-500/5',
-  'from-green-500/10 to-teal-500/5',
-  'from-orange-500/10 to-amber-500/5',
-  'from-emerald-500/10 to-green-500/5',
-  'from-rose-500/10 to-red-500/5',
-]
-
-const N = projects.length
-const CARD_W = 340
-const CARD_H = 420
-const GAP = 28
-const SLOT = CARD_W + GAP
-const OFFSETS = [-2, -1, 0, 1, 2]
-
-type Project = (typeof projects)[0]
-type CardRect = { x: number; y: number; width: number; height: number }
-
-function ProjectDialog({
-  project,
-  cardRect,
-  onClose,
-}: {
-  project: Project
-  cardRect: CardRect
-  onClose: () => void
-}) {
-  const originY = cardRect.y + cardRect.height / 2 - window.innerHeight / 2
-  const fromBelow = originY >= 0
-
-  const sliver = fromBelow
-    ? 'polygon(38% 92%, 62% 92%, 62% 100%, 38% 100%)'
-    : 'polygon(38% 0%,  62% 0%,  62% 8%,  38% 8%)'
-
-  const stretch = fromBelow
-    ? 'polygon(0% 0%, 100% 0%, 78% 100%, 22% 100%)'
-    : 'polygon(22% 0%, 78% 0%, 100% 100%, 0% 100%)'
-
-  const full = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
-
+/* ── Category chip ───────────────────────────────────────────── */
+function Chip({ category, label }: { category: CategoryKey; label?: string }) {
+  const c = projectCategories[category]
   return (
-    <>
-      <motion.div
-        className="fixed inset-0 z-50 dark:bg-black/75 bg-black/40 backdrop-blur-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.22, ease: 'easeOut' }}
-        onClick={onClose}
-      />
-
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-        <motion.div
-          className="relative dark:bg-[#0a0a0a] bg-white border border-p-border rounded-2xl p-8 max-w-lg w-full shadow-2xl pointer-events-auto"
-          style={{ willChange: 'transform, clip-path, opacity' }}
-          animate={{
-            y:        [originY, originY * 0.3, 0],
-            clipPath: [sliver,  stretch,        full],
-            opacity:  [0,       1,               1],
-          }}
-          exit={{
-            y:        [0,    originY * 0.3, originY],
-            clipPath: [full, stretch,       sliver],
-            opacity:  [1,    1,             0],
-          }}
-          transition={{
-            y:        { duration: 0.48, times: [0, 0.22, 1], ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
-            clipPath: { duration: 0.48, times: [0, 0.22, 1], ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
-            opacity:  { duration: 0.12, ease: 'easeOut' },
-          }}
-          onClick={e => e.stopPropagation()}
-        >
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-p-text-4 hover:text-p-text transition-colors text-lg leading-none"
-          >
-            ✕
-          </button>
-
-          <span
-            className={`text-xs font-mono px-3 py-1 rounded-full border ${
-              categoryColors[project.category] ?? 'text-p-text-3 border-p-border bg-p-surface'
-            }`}
-          >
-            {project.category}
-          </span>
-
-          <h3
-            className="text-3xl font-serif italic font-semibold text-p-text mt-5 mb-3 leading-tight"
-            style={{ fontFamily: 'var(--font-cormorant)' }}
-          >
-            {project.title}
-          </h3>
-
-          <p className="text-p-text-3 text-sm leading-relaxed mb-6">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map(tag => (
-              <span
-                key={tag}
-                className="text-xs border border-p-border-subtle text-p-text-4 px-3 py-1 rounded-full font-mono"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </>
+    <span
+      className="inline-block font-mono text-[0.62rem] tracking-wide px-2.5 py-1 rounded-full border"
+      style={{ color: c.solid, background: c.chipBg, borderColor: c.chipBorder }}
+    >
+      {label ?? c.label}
+    </span>
   )
 }
 
-function CarouselCard({
-  project,
-  projIdx,
-  isCenter,
-  onClick,
-}: {
-  project: Project
-  projIdx: number
-  isCenter: boolean
-  onClick: (rect: CardRect) => void
-}) {
+/* ── Inline SVG-free bar charts, rendered from real data ─────────── */
+function FigureChart({ chart, gradient, solid }: { chart: ProjectChart; gradient: string; solid: string }) {
   return (
-    <div
-      className={`relative rounded-2xl border overflow-hidden flex flex-col h-full transition-colors duration-300 ${
-        isCenter
-          ? 'border-p-border bg-p-surface cursor-pointer'
-          : 'border-p-border-subtle bg-p-surface/50 cursor-default'
-      }`}
-      onClick={isCenter ? (e) => onClick(e.currentTarget.getBoundingClientRect()) : undefined}
-    >
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradients[projIdx % gradients.length]} pointer-events-none transition-opacity duration-500 ${
-          isCenter ? 'opacity-60' : 'opacity-0'
-        }`}
-      />
+    <div className="rounded-2xl border border-p-border bg-p-surface-veil p-4">
+      <div className="flex items-center justify-between mb-4">
+        <span className="font-mono text-[0.6rem] tracking-[0.16em] uppercase text-p-text-5">{chart.fig}</span>
+        {chart.kind === 'vbars' && chart.unit && (
+          <span className="font-mono text-[0.6rem] text-p-text-5">{chart.unit}</span>
+        )}
+      </div>
 
-      <div className="relative z-10 flex flex-col h-full gap-4 p-6">
-        <div className="flex items-start justify-between">
-          <span
-            className={`text-xs font-mono px-3 py-1 rounded-full border ${
-              categoryColors[project.category] ?? 'text-p-text-3 border-p-border bg-p-surface'
-            }`}
-          >
-            {project.category}
-          </span>
-          <span className={`text-xl transition-colors ${isCenter ? 'text-p-text-4' : 'text-p-text-5'}`}>
-            ↗
-          </span>
+      {chart.kind === 'hbars' ? (
+        <div className="flex flex-col gap-2.5">
+          {chart.bars.map((b) => (
+            <div key={b.label} className="flex items-center gap-3">
+              <span className="font-mono text-[0.6rem] text-p-text-5 w-[86px] shrink-0 text-right truncate">
+                {b.label}
+              </span>
+              <div className="flex-1 h-3 rounded-full bg-p-surface overflow-hidden">
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${(b.value / chart.max) * 100}%`,
+                    background: b.hero ? gradient : solid,
+                    opacity: b.hero ? 1 : 0.4,
+                  }}
+                />
+              </div>
+              <span className="font-mono text-[0.6rem] text-p-text-4 w-9 tabular-nums text-right">{b.show}</span>
+            </div>
+          ))}
         </div>
+      ) : (
+        <div className="flex items-end justify-around gap-4 h-[128px] px-1">
+          {chart.bars.map((b) => (
+            <div key={b.label} className="flex flex-col items-center justify-end h-full flex-1 min-w-0">
+              <span className="font-mono text-[0.62rem] text-p-text-4 mb-1.5 tabular-nums">{b.show}</span>
+              <div
+                className="w-full max-w-[46px] rounded-t-md"
+                style={{
+                  height: `${(b.value / chart.max) * 92}px`,
+                  background: b.hero ? gradient : solid,
+                  opacity: b.hero ? 1 : 0.4,
+                }}
+              />
+              <span className="font-mono text-[0.6rem] text-p-text-5 mt-2 truncate max-w-full">{b.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
+/* ── Bespoke system-pipeline diagram (for the autonomous-vehicle thesis) ── */
+function PipelineFigure({ stages, solid }: { stages: { stage: string; detail: string }[]; solid: string }) {
+  return (
+    <div className="rounded-2xl border border-p-border bg-p-surface-veil p-4">
+      <div className="flex items-center justify-between mb-4">
+        <span className="font-mono text-[0.6rem] tracking-[0.16em] uppercase text-p-text-5">Fig.01 — System pipeline</span>
+        <span className="font-mono text-[0.6rem] text-p-text-5">on-device</span>
+      </div>
+      <div className="flex items-stretch gap-1.5">
+        {stages.map((s, i) => (
+          <Fragment key={s.stage}>
+            <div className="flex-1 min-w-0 rounded-lg border border-p-border bg-p-surface px-2 py-3 text-center flex flex-col justify-center">
+              <div className="font-mono text-[0.66rem] text-p-text-2 leading-tight">{s.stage}</div>
+              <div className="font-mono text-[0.54rem] text-p-text-5 mt-1 leading-tight break-words">{s.detail}</div>
+            </div>
+            {i < stages.length - 1 && (
+              <div className="flex items-center font-mono text-sm" style={{ color: solid }} aria-hidden>
+                ›
+              </div>
+            )}
+          </Fragment>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ── Framed figure plate (light matplotlib/screenshot on a white plate) ── */
+function FigurePlate({ src, caption, tall }: { src: string; caption: string; tall?: boolean }) {
+  return (
+    <div className="rounded-2xl border border-p-border overflow-hidden bg-white">
+      <div className={`flex items-center justify-center p-3 ${tall ? 'min-h-[220px]' : ''}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${BASE}${src}`}
+          alt={caption}
+          loading="lazy"
+          className={`w-full h-auto object-contain ${tall ? 'max-h-[360px]' : 'max-h-[210px]'}`}
+        />
+      </div>
+      <div className="px-3.5 py-2 border-t border-black/10 bg-white">
+        <span className="font-mono text-[0.58rem] tracking-wide text-neutral-500">{caption}</span>
+      </div>
+    </div>
+  )
+}
+
+/* ── One flagship project row ───────────────────────────────────── */
+function FeaturedRow({ project, index }: { project: FeaturedProject; index: number }) {
+  const c = projectCategories[project.category]
+  const reverse = index % 2 === 1
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 44 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.8, ease: EASE }}
+      className={`flex flex-col gap-8 md:gap-[clamp(30px,4vw,64px)] items-center ${
+        reverse ? 'md:flex-row-reverse' : 'md:flex-row'
+      }`}
+    >
+      {/* Media */}
+      <div className="flex-1 min-w-0 w-full flex flex-col gap-4">
+        {project.pipeline && <PipelineFigure stages={project.pipeline} solid={c.solid} />}
+        {project.chart && <FigureChart chart={project.chart} gradient={c.gradient} solid={c.solid} />}
+        <FigurePlate
+          src={project.image.src}
+          caption={project.image.caption}
+          tall={!project.chart && !project.pipeline}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0 w-full">
+        <p className="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-p-text-5 mb-4">P.{project.num}</p>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4">
+          <Chip category={project.category} label={project.categoryLabel} />
+          {project.context && (
+            <span className="font-mono text-[0.62rem] tracking-wide text-p-text-5">{project.context}</span>
+          )}
+        </div>
         <h3
-          className={`font-serif italic font-semibold leading-tight transition-colors ${
-            isCenter ? 'text-p-text text-xl' : 'text-p-text-4 text-lg'
-          }`}
-          style={{ fontFamily: 'var(--font-cormorant)' }}
+          className="font-serif italic font-semibold text-p-text leading-[1.08] tracking-tight mb-4"
+          style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(1.9rem, 3vw, 2.75rem)' }}
         >
           {project.title}
         </h3>
-
-        <p
-          className={`text-sm leading-relaxed font-light flex-1 ${
-            isCenter ? 'text-p-text-3' : 'text-p-text-5'
-          }`}
-        >
-          {project.description}
+        <p className="font-light text-p-text-3 leading-[1.85] mb-7 max-w-[46ch] text-[0.98rem]">
+          {project.blurb}
         </p>
 
-        <div className="flex flex-wrap gap-1.5 mt-auto">
-          {project.tags.slice(0, 4).map(tag => (
+        {/* Stats */}
+        <div className="flex flex-wrap gap-x-[clamp(24px,3vw,40px)] gap-y-5 mb-7">
+          {project.stats.map((s) => (
+            <div key={s.label}>
+              <div
+                className="font-serif italic font-semibold leading-none"
+                style={{
+                  fontFamily: 'var(--font-cormorant)',
+                  fontSize: 'clamp(1.7rem, 2.4vw, 2.35rem)',
+                  ...(s.hero
+                    ? {
+                        background: c.gradient,
+                        WebkitBackgroundClip: 'text',
+                        backgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        color: 'transparent',
+                      }
+                    : { color: 'var(--p-text)' }),
+                }}
+              >
+                {s.value}
+              </div>
+              <div className="font-mono text-[0.63rem] tracking-wide uppercase text-p-text-5 mt-2">{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((t) => (
             <span
-              key={tag}
-              className="text-xs border border-p-border-subtle text-p-text-5 px-2.5 py-0.5 rounded-full font-mono"
+              key={t}
+              className="font-mono text-[0.68rem] text-p-text-4 px-2.5 py-1 rounded-full border border-p-border"
             >
-              {tag}
+              {t}
             </span>
           ))}
-          {project.tags.length > 4 && (
-            <span className="text-xs text-p-text-5 px-2.5 py-0.5 font-mono">
-              +{project.tags.length - 4}
-            </span>
-          )}
         </div>
+      </div>
+    </motion.div>
+  )
+}
+
+/* ── Compact catalogue row ──────────────────────────────────────── */
+function CatalogueRow({ project }: { project: (typeof projectCatalogue)[number] }) {
+  const c = projectCategories[project.category]
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-[minmax(180px,1.6fr)_150px_minmax(200px,2.1fr)_minmax(120px,1fr)] gap-3 md:gap-5 md:items-center py-4 px-2 border-b border-p-border-subtle rounded-lg hover:bg-p-surface-veil transition-colors">
+      <div className="flex gap-3 items-baseline min-w-0">
+        <span className="font-mono text-[0.7rem] text-p-text-5">{project.num}</span>
+        <span
+          className="font-serif italic font-semibold text-[1.1rem] text-p-text-2"
+          style={{ fontFamily: 'var(--font-cormorant)' }}
+        >
+          {project.title}
+        </span>
+      </div>
+      <div>
+        <span
+          className="font-mono text-[0.6rem] px-2.5 py-1 rounded-full border"
+          style={{ color: c.solid, background: c.chipBg, borderColor: c.chipBorder }}
+        >
+          {c.label}
+        </span>
+      </div>
+      <div className="font-light text-[0.82rem] leading-[1.5] text-p-text-4">{project.summary}</div>
+      <div className="flex flex-wrap gap-1.5 md:justify-end">
+        {project.stack.map((s) => (
+          <span
+            key={s}
+            className="font-mono text-[0.6rem] text-p-text-5 px-2 py-0.5 rounded-full border border-p-border"
+          >
+            {s}
+          </span>
+        ))}
       </div>
     </div>
   )
 }
 
 export function Projects() {
-  const sectionRef = useRef(null)
-  const inView = useInView(sectionRef, { once: true, margin: '-80px' })
-  const [centerIdx, setCenterIdx] = useState(0)
-  const [paused, setPaused] = useState(false)
-  const [selectedProject, setSelectedProject] = useState<{ project: Project; cardRect: CardRect } | null>(null)
-
-  useEffect(() => {
-    if (paused) return
-    const timer = setTimeout(() => {
-      setCenterIdx(prev => prev + 1)
-    }, 2000)
-    return () => clearTimeout(timer)
-  }, [centerIdx, paused])
-
-  const currentProjIdx = ((centerIdx % N) + N) % N
+  const [open, setOpen] = useState(false)
 
   return (
-    <section id="projects" ref={sectionRef} className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="relative py-16 md:py-32 px-5 md:px-6 bg-background">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.8, ease: EASE }}
         >
-          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
-            03 — Projects
-          </p>
+          <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">03 — Projects</p>
           <h2
-            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-4 leading-tight"
+            className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text mb-6 leading-tight"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             Things I&apos;ve
@@ -249,99 +284,74 @@ export function Projects() {
               engineered.
             </span>
           </h2>
-          <p className="text-p-text-4 text-sm font-light mb-16 max-w-md">
-            Eleven projects spanning NLP, Computer Vision, and Machine Learning —
-            each solving a real problem with cutting-edge techniques.
+          <p className="font-light text-p-text-3 leading-[1.85] max-w-[54ch] text-[1.02rem]">
+            Six flagship builds — spanning NLP, computer vision, robotics and machine learning — each documented end
+            to end, from method to measured result. Nine more sit in the catalogue below.
           </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div
-          className="relative overflow-hidden"
-          style={{ height: CARD_H + 40 }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          {/* Edge fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
-
-          {/* Arrow buttons */}
-          <button
-            onClick={() => setCenterIdx(prev => prev - 1)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full border border-p-border dark:bg-black/60 bg-white/80 text-p-text-3 hover:text-p-text hover:border-p-border transition-all duration-200"
-          >
-            ←
-          </button>
-          <button
-            onClick={() => setCenterIdx(prev => prev + 1)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full border border-p-border dark:bg-black/60 bg-white/80 text-p-text-3 hover:text-p-text hover:border-p-border transition-all duration-200"
-          >
-            →
-          </button>
-
-          <AnimatePresence>
-            {OFFSETS.map(offset => {
-              const projIdx = ((centerIdx + offset) % N + N) % N
-              const project = projects[projIdx]
-              const absOff = Math.abs(offset)
-              const isCenter = offset === 0
-              const targetX = offset * SLOT - CARD_W / 2
-              const targetOpacity = isCenter ? 1 : absOff === 1 ? 0.55 : 0.25
-              const targetScale = isCenter ? 1 : absOff === 1 ? 0.88 : 0.76
-              const zIndex = isCenter ? 10 : absOff === 1 ? 5 : 1
-
-              return (
-                <motion.div
-                  key={projIdx}
-                  className="absolute top-5"
-                  style={{ left: '50%', width: CARD_W, height: CARD_H, zIndex }}
-                  initial={{ x: targetX, opacity: 0, scale: targetScale }}
-                  animate={{ x: targetX, opacity: targetOpacity, scale: targetScale }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-                >
-                  <CarouselCard
-                    project={project}
-                    projIdx={projIdx}
-                    isCenter={isCenter}
-                    onClick={(rect) => setSelectedProject({ project, cardRect: rect })}
-                  />
-                </motion.div>
-              )
-            })}
-          </AnimatePresence>
-        </div>
-
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-6">
-          {projects.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                const base = Math.floor(centerIdx / N) * N
-                setCenterIdx(base + i)
-              }}
-              className={`rounded-full transition-all duration-300 ${
-                currentProjIdx === i
-                  ? 'w-6 h-1.5 bg-p-text'
-                  : 'w-1.5 h-1.5 bg-p-text-5 hover:bg-p-text-4'
-              }`}
-            />
+        {/* Flagship rows */}
+        <div className="flex flex-col gap-[clamp(64px,9vw,116px)] mt-[clamp(48px,6vw,84px)]">
+          {featuredProjects.map((project, i) => (
+            <FeaturedRow key={project.num} project={project} index={i} />
           ))}
         </div>
-      </div>
 
-      {/* Dialog */}
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectDialog
-            project={selectedProject.project}
-            cardRect={selectedProject.cardRect}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
+        {/* Fading-line chevron divider */}
+        <div className="flex items-center gap-5 mt-[clamp(52px,6vw,80px)]">
+          <span className="flex-1 h-px bg-gradient-to-r from-transparent to-p-border" />
+          <motion.button
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full font-mono text-[0.72rem] tracking-[0.12em] uppercase cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.35)] transition-shadow duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
+            style={{ background: 'var(--p-text)', color: 'var(--p-bg)' }}
+          >
+            <span>{open ? 'Show fewer projects' : 'View 9 more projects'}</span>
+            <motion.svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              animate={open ? { rotate: 180, y: 0 } : { rotate: 0, y: [0, 3, 0] }}
+              transition={
+                open
+                  ? { duration: 0.4, ease: EASE }
+                  : { y: { duration: 1.4, repeat: Infinity, ease: 'easeInOut' }, rotate: { duration: 0.4 } }
+              }
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </motion.svg>
+          </motion.button>
+          <span className="flex-1 h-px bg-gradient-to-l from-transparent to-p-border" />
+        </div>
+
+        {/* Expandable catalogue */}
+        <motion.div
+          initial={false}
+          animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0, marginTop: open ? 44 : 0 }}
+          transition={{ duration: 0.55, ease: EASE }}
+          className="overflow-hidden"
+        >
+          <p className="font-mono text-[0.62rem] tracking-[0.22em] uppercase text-p-text-5 mb-5">
+            All projects · The full catalogue
+          </p>
+          <div className="hidden md:grid grid-cols-[minmax(180px,1.6fr)_150px_minmax(200px,2.1fr)_minmax(120px,1fr)] gap-5 px-2 pb-3.5 border-b border-p-border">
+            <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-p-text-5">Project</span>
+            <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-p-text-5">Category</span>
+            <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-p-text-5">Summary</span>
+            <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-p-text-5 text-right">Stack</span>
+          </div>
+          {projectCatalogue.map((project) => (
+            <CatalogueRow key={project.num} project={project} />
+          ))}
+        </motion.div>
+      </div>
     </section>
   )
 }
