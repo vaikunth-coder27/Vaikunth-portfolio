@@ -48,7 +48,7 @@ export function Hero() {
             </motion.h1>
             <motion.h1
               {...fadeUp(0.3)}
-              className="text-[clamp(3.2rem,12vw,8.5rem)] font-serif italic font-semibold leading-[0.9] tracking-tight"
+              className="text-[clamp(3.2rem,12vw,8.5rem)] font-serif italic font-semibold leading-[0.9] tracking-tight pb-[0.18em] -mb-[0.18em]"
               style={{
                 fontFamily: 'var(--font-cormorant)',
                 background: 'linear-gradient(135deg, #22d3ee 0%, #818cf8 100%)',
