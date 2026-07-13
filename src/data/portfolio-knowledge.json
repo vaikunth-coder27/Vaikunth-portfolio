@@ -1,0 +1,257 @@
+{
+  "_meta": {
+    "purpose": "Single source of truth for the AI chat assistant + MCP server tools. All facts here are grounded; the model must not invent details beyond this file.",
+    "owner": "Vaikunth Guruswamy",
+    "lastUpdated": "2026-07-12"
+  },
+
+  "identity": {
+    "name": "Vaikunth Guruswamy",
+    "shortName": "Vaikunth",
+    "title": "Founding AI & Software Engineer",
+    "tagline": "AI engineer who ships production LLM, computer-vision and forecasting systems end-to-end.",
+    "location": "Edinburgh, United Kingdom",
+    "summary": "AI engineer who ships production LLM, computer-vision, and forecasting systems end-to-end. As the founding software engineer at a UK manufacturer (ZOT Engineering), established its entire software foundation and delivered a range of production AI and full-stack systems, from multi-agent AI pipelines, an LLM payroll assistant, and PCB-defect computer vision to the serverless Azure platform they run on. Comfortable across the full stack (LLMOps, backend, cloud, and DevOps), with an MSc in Artificial Intelligence from the University of Edinburgh and an Amazon-collaborated dissertation on privacy and memorisation in LLMs.",
+    "specializations": [
+      "Large Language Models",
+      "Computer Vision",
+      "Generative AI",
+      "LLMOps",
+      "DevOps & Azure Cloud",
+      "Azure AI Foundry"
+    ],
+    "availability": "Open to conversations about research collaborations, full-time roles, and ambitious AI projects."
+  },
+
+  "contact": {
+    "email": "vaikunthgc@gmail.com",
+    "phone": "+44 7407 446796",
+    "linkedin": "https://www.linkedin.com/in/vaikunth-guruswamy/",
+    "github": "https://github.com/vaikunth-coder27",
+    "preferredContact": "Email, or use the in-chat 'notify Vaikunth' option to send him a message directly.",
+    "website": "https://www.vaikunthguruswamy.uk"
+  },
+
+  "byTheNumbers": [
+    { "value": "82%", "label": "MSc Distinction", "sub": "University of Edinburgh" },
+    { "value": "9.5/10", "label": "BE CGPA", "sub": "Anna University" },
+    { "value": "15+", "label": "Production systems built & shipped 0->1" },
+    { "value": "114+", "label": "Serverless Azure Function endpoints architected" }
+  ],
+
+  "experience": [
+    {
+      "company": "ZOT Engineering Ltd",
+      "companyUrl": "https://www.zot.co.uk/",
+      "role": "Software Application Engineer (Founding Engineer)",
+      "type": "Full-time - AI & Full-Stack",
+      "period": "Aug 2025 - Present",
+      "current": true,
+      "location": "Edinburgh, United Kingdom",
+      "industry": "PCB & Precision Manufacturing",
+      "headline": "Founding engineer at a UK manufacturer: built the digital foundation 0->1, then turned it into a platform that ships AI and full-stack features across the business at speed.",
+      "highlights": [
+        "Scaled the greenfield foundation into a unified, company-wide ERP platform, deploying 15+ production systems on Microsoft Azure.",
+        "Delivered an LLM-powered payroll assistant with prompt caching and multi-tool orchestration.",
+        "Built a privacy-first, multi-agent recruitment pipeline with automated candidate scoring.",
+        "Engineered a PCB-defect detection system using RANSAC, DETR, DINOv3 and SAM2.",
+        "Built LayoutLM-based document intelligence and Times-FM demand forecasting.",
+        "Built natural-language-to-SQL graph inference and 100+ live executive dashboards.",
+        "Delivered a paperless manufacturing-traceability system that logs every production step, reducing paper usage by 80%.",
+        "Architected the backend as serverless Azure Functions (114+ endpoints), integrating three legacy on-premise ERP systems over an encrypted VPN.",
+        "Designed the complete Azure cloud architecture from the ground up and owned FinOps cost governance.",
+        "Set up the company's GitHub org, repos and GitHub Actions CI/CD, with ESLint, unit tests and Cypress E2E quality gates.",
+        "Instrumented distributed tracing, monitoring and alerting across production systems.",
+        "Re-engineered report-generation query structures, cutting execution time from 55 seconds to 3.4 seconds (16x improvement)."
+      ],
+      "stack": ["LLMOps", "Multi-Agent AI", "NL-to-SQL", "Computer Vision", "Forecasting", "Azure DevOps", "CI/CD", "Observability", "FinOps"]
+    },
+    {
+      "company": "ZOT Engineering Ltd",
+      "companyUrl": "https://www.zot.co.uk/",
+      "role": "Software Application Engineer (Intern)",
+      "type": "Internship - Full-Stack",
+      "period": "Feb 2025 - Jul 2025",
+      "current": false,
+      "location": "Edinburgh, United Kingdom",
+      "headline": "Laying the 0->1 foundation as the company's first software engineer.",
+      "highlights": [
+        "Joined as the first software engineer and established the company's entire technical foundation.",
+        "Partnered with stakeholders across three business divisions to map manual workflows into well-defined deliverables (tracked in ClickUp).",
+        "Selected the full technology stack and designed the relational database schema.",
+        "Delivered the public company website and the first ERP modules and analytics dashboards on an Angular 19 SSR frontend and Python REST API.",
+        "Standardised a secure database-to-API-to-UI path with MSAL/JWT auth, RBAC, CI/CD and automated testing at 98% coverage."
+      ],
+      "stack": ["Angular 19 SSR", "Python Flask", "C# WPF", "SQL Server", "MongoDB", "MSAL/JWT", "CI/CD"]
+    },
+    {
+      "company": "Amazon",
+      "companyUrl": "https://www.amazon.co.uk/",
+      "role": "Industry Collaborated Dissertation (MSc Research Partnership)",
+      "type": "MSc Research - Industry Partnership",
+      "period": "Mar 2024 - Aug 2024",
+      "current": false,
+      "location": "Edinburgh, United Kingdom",
+      "headline": "MSc thesis in collaboration with Amazon: measuring and mitigating how code-based LLMs memorise their training data, and the privacy and copyright risks it creates.",
+      "highlights": [
+        "Investigated memorization in code-based LLMs (verbatim reproduction of training data driving privacy, PII-leakage and copyright risk). Awarded a distinction (82%).",
+        "Evaluated encoder-only, decoder-only and encoder-decoder families (CodeBERT, CodeGPT, CodeT5) on CodeSearchNet across four languages (Python, Java, JavaScript, Ruby), 30,000 samples per language.",
+        "Designed two data-extraction attacks (masked-token prediction and prefix-suffix generation) and an extended CodeBLEU metric with AST-based privacy components.",
+        "Found identifiers and string literals most memorised (up to 79.3% exact match); verbose languages (Java) memorise more than concise ones (Python); 8-bit quantization reduced exact memorization while preserving code quality.",
+        "Analysed how Few-Shot Learning shifts the balance between memorization and generalisation."
+      ],
+      "stack": ["LLM Memorization", "CodeBLEU", "CodeBERT", "CodeGPT", "CodeT5", "8-bit Quantization", "Few-Shot Learning", "Privacy AI"]
+    }
+  ],
+
+  "education": [
+    {
+      "institution": "The University of Edinburgh",
+      "degree": "Master of Science in Artificial Intelligence",
+      "grade": "82% (Distinction in Thesis)",
+      "period": "Sep 2023 - Aug 2024",
+      "location": "Edinburgh, United Kingdom",
+      "courses": [
+        "NLP (Transformers & LLMs)",
+        "Data Visualization",
+        "Cloud Programming (Docker, Azure)",
+        "Machine Learning",
+        "Image & Computer Vision",
+        "AI Ethics"
+      ]
+    },
+    {
+      "institution": "Anna University",
+      "degree": "Bachelor of Engineering in Electronics and Communication",
+      "grade": "CGPA 9.50 / 10.0",
+      "period": "Aug 2019 - Jun 2023",
+      "location": "Chennai, India",
+      "courses": [
+        "Software Engineering (Agile)",
+        "AI and ML",
+        "Data Structures & Algorithms",
+        "Object-oriented Design",
+        "Data Science"
+      ]
+    }
+  ],
+
+  "skills": {
+    "Languages": ["Python", "TypeScript", "C++", "C# / .NET", "Rust", "SQL"],
+    "Deep Learning & AI": ["PyTorch", "TensorFlow", "Keras", "Hugging Face Transformers", "OpenCV", "ONNX Runtime", "NumPy", "Pandas", "scikit-learn", "XGBoost", "NLTK", "spaCy"],
+    "LLMs & GenAI": ["LangChain", "RAG Pipelines", "Vector Databases", "Azure OpenAI", "Prompt Engineering", "Multi-Agent Systems", "Model Context Protocol (MCP)"],
+    "MLOps & Deployment": ["MLflow", "Azure ML", "Docker", "Kubernetes", "CI/CD"],
+    "Cloud & Databases": ["Azure", "AWS", "PostgreSQL", "MongoDB", "SQL Server", "HPC"],
+    "Web & Tooling": ["React", "Angular", "Node.js", "Git", "Linux"],
+    "AI Specializations": ["Machine Learning", "Deep Learning", "Computer Vision", "Natural Language Processing", "Large Language Models", "Transformers", "Generative AI", "MLOps", "LLMOps", "Agentic AI", "RAG"]
+  },
+
+  "projects": {
+    "featured": [
+      {
+        "num": "01",
+        "title": "Decentralized Autonomous Vehicle",
+        "category": "Computer Vision / Robotics",
+        "context": "B.E. Final-Year Thesis - MIT, Anna University",
+        "blurb": "A Raspberry Pi self-driving car that cooperates with no central server. It parses a spoken destination, resolves an offline route across a dual-layer Folium + Google-Earth map, and plans motion with the Haversine formula, while a YOLO/Darknet perception stack detects 205 traffic-sign classes (trained on 97K+ images) and a custom model reads traffic lights at 83% accuracy, rerouting in real time on-device.",
+        "stats": ["205 sign classes", "97K training images", "83% signal accuracy"],
+        "tags": ["YOLO / Darknet", "CNN", "Raspberry Pi", "OpenCV", "CUDA", "GPS"]
+      },
+      {
+        "num": "02",
+        "title": "Attention-based Neural Machine Translation",
+        "category": "NLP",
+        "context": "MSc - Natural Language Understanding, Edinburgh",
+        "blurb": "Built and benchmarked four German->English translation architectures on a low-resource Europarl subset, from an attentional LSTM baseline to a lexical model and a from-scratch Transformer with multi-head attention. The lexical model won decisively, converging in 53 epochs against the baseline's 99.",
+        "stats": ["13.5 test BLEU", "24.5 perplexity", "+24% vs baseline"],
+        "tags": ["LSTM", "Transformer", "Multi-head Attention", "PyTorch", "Beam Search"]
+      },
+      {
+        "num": "03",
+        "title": "ANT-BOT: Autonomous Maze-Solving Rover",
+        "category": "Robotics / Embedded",
+        "context": "B.E. Capstone - Anna University",
+        "blurb": "A low-cost ESP32-CAM rover that photographs an unknown maze, solves the shortest escape route with Dijkstra's algorithm over the pixel grid, converts it into a turn-by-turn instruction set, and drives it end to end, validated in a Pygame simulation before hardware deployment.",
+        "stats": ["26 route steps", "ESP32 on-device", "0 human input"],
+        "tags": ["Dijkstra", "OpenCV", "ESP32-CAM", "Pygame", "Arduino"]
+      },
+      {
+        "num": "04",
+        "title": "RNN vs GRU Language Modelling",
+        "category": "NLP",
+        "context": "MSc - Natural Language Understanding, Edinburgh",
+        "blurb": "Implemented vanilla RNN and GRU language models from scratch in NumPy (forward pass, backprop and backpropagation-through-time) to study subject-verb agreement. A hidden-state cosine analysis showed the GRU far better preserves long-range syntactic dependencies.",
+        "stats": ["84% agreement accuracy", "+10pts GRU vs RNN", "NumPy from scratch"],
+        "tags": ["RNN", "GRU", "BPTT", "NumPy", "Hyperparameter Tuning"]
+      },
+      {
+        "num": "05",
+        "title": "Spotify Hit-Song Prediction",
+        "category": "Machine Learning",
+        "context": "MSc - Applied Machine Learning, Edinburgh",
+        "blurb": "Predicted whether a track would become a lasting chart hit from its audio features alone, across 650K+ rows of Spotify's Top-200. Benchmarked four classifiers plus K-means clustering. Random Forest led decisively, with energy and danceability the strongest drivers of success.",
+        "stats": ["0.823 F1 (Random Forest)", "0.79 ROC-AUC", "652K rows analysed"],
+        "tags": ["Random Forest", "XGBoost", "K-Means", "scikit-learn", "Keras"]
+      },
+      {
+        "num": "06",
+        "title": "Character-Level Language Identification",
+        "category": "NLP",
+        "context": "MSc - Accelerated NLP, Edinburgh",
+        "blurb": "Built interpolated character-trigram language models from scratch (preprocessing, add-alpha smoothing and text generation) that identify a document's language purely by perplexity, then extended the study with four neural next-character models. The English model nailed the test document at a fraction of the rivals' perplexity.",
+        "stats": ["8.8 EN perplexity", "2.5x lower than rivals", "0 toolkits used"],
+        "tags": ["N-gram LM", "Perplexity", "Keras / LSTM", "NumPy", "Europarl"]
+      }
+    ],
+    "catalogue": [
+      { "num": "07", "title": "Slot Labeling for Task-Oriented Dialogue", "category": "NLP", "summary": "Improved BIO slot-filling on the NLU++ hotel dataset with word embeddings, a constrained Viterbi decoder and dependency-aware features.", "stack": ["spaCy", "Logistic Reg", "Viterbi"] },
+      { "num": "08", "title": "Distributed Neural Network Training", "category": "Machine Learning", "summary": "Edinburgh research review surveying data-parallelism, AllReduce, gradient compression and straggler mitigation for large-scale training.", "stack": ["PyTorch DDP", "Horovod", "Survey"] },
+      { "num": "09", "title": "AI Ethics - Automated Hiring Bias", "category": "Responsible AI", "summary": "Utilitarian and Kantian analysis of algorithmic discrimination in the Mobley v. Workday hiring-AI lawsuit, proposing an audit framework.", "stack": ["Fairness", "Governance", "Policy"] },
+      { "num": "10", "title": "Vehicle Damage Assessment Portal", "category": "Computer Vision", "summary": "Flask portal integrating CNN models with IBM Cloud to estimate insurance costs from vehicle damage photos.", "stack": ["CNN", "Flask", "IBM Cloud"] },
+      { "num": "11", "title": "Chess Engine", "category": "Machine Learning", "summary": "Reinforcement-learning chess agent with a custom Deep Q-Network, paired with an interactive PyQt5 GUI.", "stack": ["RL", "DQN", "PyQt5"] },
+      { "num": "12", "title": "Smart Glass Assistant", "category": "Computer Vision", "summary": "Wearable assistant with real-time object detection, map navigation, translation and a chatbot on a NodeMCU; led as team lead.", "stack": ["OpenCV", "IoT", "NodeMCU"] },
+      { "num": "13", "title": "Sentiment-Aware Chat-Bot", "category": "NLP", "summary": "Multi-platform sentiment chatbot across WhatsApp, Telegram and web, plus a voice-controlled CLI music player.", "stack": ["NLP", "LSTM", "Telegram API"] },
+      { "num": "14", "title": "Face Detection & Recognition", "category": "Computer Vision", "summary": "Haar-cascade recognition with OTP email verification for enrolment and automated attendance logging.", "stack": ["OpenCV", "Haar", "SMTP"] },
+      { "num": "15", "title": "Rangeless Bot", "category": "Robotics / Embedded", "summary": "DTMF-controlled Arduino rover operable from any distance over a phone call, built for hostile environments.", "stack": ["DTMF", "Arduino", "Robotics"] }
+    ]
+  },
+
+  "certifications": [
+    { "title": "Model Context Protocol: Advanced Topics", "issuer": "Anthropic", "issued": "Apr 2026", "credentialId": "5rwp5p8zexms" },
+    { "title": "Introduction to Subagents", "issuer": "Anthropic", "issued": "Apr 2026", "credentialId": "zxrn33hkqntd" },
+    { "title": "Introduction to Model Context Protocol", "issuer": "Anthropic", "issued": "Apr 2026", "credentialId": "x4a9i5qrh23t" },
+    { "title": "Claude Code in Action", "issuer": "Anthropic", "issued": "Mar 2026", "credentialId": "og9wz8e6sszm" },
+    { "title": "AI Fluency Framework & Foundations", "issuer": "Anthropic", "issued": "Apr 2026", "credentialId": "8odq6jmusobx" },
+    { "title": "Getting Started with Neural Networks", "issuer": "Analytics Vidhya", "issued": "Dec 2020", "credentialId": "6sqo2pnyaa", "skills": ["Deep Learning", "Python"] },
+    { "title": "Introduction to Natural Language Processing", "issuer": "Analytics Vidhya", "issued": "Dec 2020", "credentialId": "texeo0qroz", "skills": ["Python"] },
+    { "title": "A Foundation Program in Data Science", "issuer": "GreyCampus Enterprise", "issued": "Feb 2021", "credentialId": "60810234027119", "skills": ["Data Science", "Python"] },
+    { "title": "A Foundation Program in Full Stack", "issuer": "GreyCampus Enterprise", "issued": "Feb 2021", "credentialId": "61310234027129", "skills": ["Python"] },
+    { "title": "Accomplishments in Hash Code 2021", "issuer": "Google", "issued": "Mar 2021", "skills": ["Python"] },
+    { "title": "AIML Workshop on Media Analytics: How Streaming Services Recommend A Movie", "issuer": "Edureka", "issued": "Feb 2021", "credentialId": "GTT8YCYMS", "skills": ["Python", "Machine Learning"] },
+    { "title": "Mastering Dialogflow: Build Smart Chatbots using Dialogflow", "issuer": "Udemy", "issued": "Jan 2021", "credentialId": "UC-b28e466a-4c3a-4ddd-8490-b0b17669d21f" },
+    { "title": "Develop CHATBOT with Microsoft Azure 2021", "issuer": "Udemy", "issued": "Jan 2021", "credentialId": "UC-8caf4f40-f586-45ce-b87f-6c6fba294bd4" },
+    { "title": "Python and Flask Demonstrations Practice Course", "issuer": "Udemy", "issued": "Jan 2021", "credentialId": "UC-c4c747b7-f194-48c3-b851-470e9ad022ae", "skills": ["Python"] },
+    { "title": "6-Week eYantra Online Software Foundation Course", "issuer": "Indian Institute of Technology, Bombay", "issued": "Jun 2021", "credentialId": "26009bf1f0b4f752b42299e9e55e6d90f4099ec2", "skills": ["Python"] },
+    { "title": "Learn Arduino Using TinkerCAD", "issuer": "IIITDM Kancheepuram", "issued": "Jun 2020" },
+    { "title": "Basics of PLC", "issuer": "Siemens", "issued": "Aug 2020", "credentialId": "TN/MAA/4001/072020/0111" },
+    { "title": "Cisco Certified Introduction to IoT", "issuer": "Cisco Networking Academy", "issued": "Jul 2020" },
+    { "title": "Career Edge - Knockdown the Lockdown", "issuer": "TCS iON", "issued": "Jun 2020", "credentialId": "4-7275272-1016" }
+  ],
+
+  "talkingPoints": {
+    "whyHireHim": [
+      "Rare end-to-end range: takes AI from research through to production, plus the full stack around it (backend, cloud, DevOps, MLOps).",
+      "Proven 0->1 builder: was the founding/first engineer at ZOT and stood up the entire software function.",
+      "Ships real, measurable impact: 16x query speedup, 80% paper reduction, 114+ endpoints, 15+ production systems.",
+      "Strong academic + industry pedigree: MSc AI (Distinction, Edinburgh) with an Amazon-collaborated dissertation.",
+      "Deep, current GenAI expertise: LLMOps, multi-agent systems, RAG, and Model Context Protocol (this chat is his own MCP build)."
+    ],
+    "funFact": "The AI assistant you're chatting with is itself one of Vaikunth's builds: a guardrailed, cost-optimised chat backed by a custom Model Context Protocol (MCP) server."
+  },
+
+  "faq": [
+    { "q": "Is Vaikunth open to work?", "a": "Yes - he's open to research collaborations, full-time roles, and ambitious AI projects. You can reach him at vaikunthgc@gmail.com or send a message right here in the chat." },
+    { "q": "Where is he based?", "a": "Edinburgh, United Kingdom." },
+    { "q": "What's his strongest area?", "a": "Production LLM/GenAI engineering end-to-end - from model to backend to cloud - backed by an MSc in AI and hands-on LLMOps at ZOT Engineering." }
+  ]
+}

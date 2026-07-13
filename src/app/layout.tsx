@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.vaikunthguruswamy.uk"),
 
   title: {
-    default: "Vaikunth Guruswamy — AI Researcher & ML Engineer",
+    default: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
     template: "%s | Vaikunth Guruswamy",
   },
   description:
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: "https://www.vaikunthguruswamy.uk",
     siteName: "Vaikunth Guruswamy",
-    title: "Vaikunth Guruswamy — AI Researcher & ML Engineer",
+    title: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
     description:
       "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK. Expert in Machine Learning, Deep Learning, and NLP.",
     images: [
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
         url: "/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Vaikunth Guruswamy — AI Researcher & ML Engineer",
+        alt: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
         type: "image/webp",
       },
     ],
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Vaikunth Guruswamy — AI Researcher & ML Engineer",
+    title: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
     description:
       "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK.",
     images: ["/og-image.webp"],

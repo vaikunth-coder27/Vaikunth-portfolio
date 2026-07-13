@@ -35,7 +35,7 @@ export function Press() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-4">
-            08 — Featured In
+            08 / Featured In
           </p>
           <h2
             className="text-5xl md:text-6xl font-serif italic font-semibold text-p-text leading-tight"

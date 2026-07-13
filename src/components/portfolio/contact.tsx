@@ -20,7 +20,7 @@ export function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <p className="font-mono text-xs text-p-text-5 tracking-[0.3em] uppercase mb-8">
-            09 — Contact
+            09 / Contact
           </p>
         </motion.div>
 
@@ -58,7 +58,7 @@ export function Contact() {
           className="text-p-text-4 text-base font-light max-w-lg mx-auto mb-12 leading-relaxed"
         >
           Whether it&apos;s a research collaboration, a full-time role, or an ambitious
-          AI project — I&apos;m always open to a conversation.
+          AI project, I&apos;m always open to a conversation.
         </motion.p>
 
         {/* CTA buttons */}
@@ -92,7 +92,7 @@ export function Contact() {
         >
           <div className="h-px w-12 md:w-16 bg-p-border" />
           {[
-            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vaikunth-guruswamy-698b3a1b1/' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vaikunth-guruswamy/' },
             { label: 'GitHub', href: 'https://github.com/vaikunth-coder27' },
           ].map((link) => (
             <a
