@@ -22,22 +22,24 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.vaikunthguruswamy.uk"),
 
   title: {
-    default: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
+    default: "Vaikunth Guruswamy | AI Engineer & MLOps Engineer in Edinburgh",
     template: "%s | Vaikunth Guruswamy",
   },
   description:
-    "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK. Expert in Machine Learning, Deep Learning, NLP, and LLMs.",
+    "AI Engineer and MLOps Engineer based in Edinburgh, UK. MSc Artificial Intelligence (Distinction) from the University of Edinburgh, with an Amazon-collaborated dissertation on LLM privacy. Builds production LLM, computer-vision, and full-stack systems — Machine Learning, Deep Learning, NLP, LLMs, and MLOps.",
 
   keywords: [
     "Vaikunth Guruswamy",
-    "AI Researcher",
-    "Machine Learning Engineer",
+    "AI Engineer Edinburgh",
+    "MLOps Engineer Edinburgh",
+    "Machine Learning Engineer Edinburgh",
+    "AI Engineer Scotland",
+    "LLM Engineer UK",
     "NLP Engineer",
     "Deep Learning",
     "University of Edinburgh",
     "MSc Artificial Intelligence",
-    "Full Stack Engineer",
-    "LLM Research",
+    "Full Stack AI Engineer",
     "Python ML Engineer UK",
   ],
 
@@ -65,15 +67,15 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: "https://www.vaikunthguruswamy.uk",
     siteName: "Vaikunth Guruswamy",
-    title: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
+    title: "Vaikunth Guruswamy | AI Engineer & MLOps Engineer in Edinburgh",
     description:
-      "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK. Expert in Machine Learning, Deep Learning, and NLP.",
+      "AI Engineer and MLOps Engineer based in Edinburgh, UK. MSc AI (Distinction) from the University of Edinburgh. Builds production LLM, computer-vision, and full-stack systems.",
     images: [
       {
         url: "/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
+        alt: "Vaikunth Guruswamy | AI Engineer & MLOps Engineer in Edinburgh",
         type: "image/webp",
       },
     ],
@@ -81,9 +83,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Vaikunth Guruswamy | AI Researcher & ML Engineer",
+    title: "Vaikunth Guruswamy | AI Engineer & MLOps Engineer in Edinburgh",
     description:
-      "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Full-Stack Software Engineer at ZOT, UK.",
+      "AI Engineer and MLOps Engineer based in Edinburgh, UK. MSc AI (Distinction) from the University of Edinburgh.",
     images: ["/og-image.webp"],
   },
 };
