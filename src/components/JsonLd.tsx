@@ -8,7 +8,7 @@ export function FaqJsonLd() {
         name: "Who is Vaikunth Guruswamy?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Vaikunth Guruswamy is an AI Researcher and ML Engineer based in the UK. He holds an MSc in Artificial Intelligence (Distinction, 82%) from the University of Edinburgh and is currently a Full-Stack Software Engineer at ZOT, UK.",
+          text: "Vaikunth Guruswamy is an AI Engineer and MLOps Engineer based in Edinburgh, Scotland, UK. He holds an MSc in Artificial Intelligence (Distinction, 82%) from the University of Edinburgh and is the founding software engineer at ZOT, UK, where he builds production LLM, computer-vision, and full-stack systems.",
         },
       },
       {
@@ -52,15 +52,52 @@ export function PersonJsonLd() {
     "@type": "Person",
     "@id": "https://www.vaikunthguruswamy.uk/#person",
     name: "Vaikunth Guruswamy",
+    alternateName: "Vaikunth G C",
     url: "https://www.vaikunthguruswamy.uk",
-    jobTitle: "Full-Stack Software Engineer",
+    jobTitle: ["AI Engineer", "MLOps Engineer", "Full-Stack Software Engineer"],
     description:
-      "AI Researcher and ML Engineer with MSc AI (Distinction) from the University of Edinburgh. Currently Full-Stack Software Engineer at ZOT, UK. Specialising in Machine Learning, Deep Learning, and NLP.",
+      "AI Engineer and MLOps Engineer based in Edinburgh, UK, with an MSc in Artificial Intelligence (Distinction) from the University of Edinburgh. Builds production LLM, computer-vision, and full-stack systems. Specialising in Machine Learning, Deep Learning, NLP, LLMs, and MLOps.",
     email: "vaikunthgc@gmail.com",
     nationality: {
       "@type": "Country",
       name: "United Kingdom",
     },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Edinburgh",
+      addressRegion: "Scotland",
+      addressCountry: "GB",
+    },
+    homeLocation: {
+      "@type": "Place",
+      name: "Edinburgh, Scotland, United Kingdom",
+    },
+    workLocation: {
+      "@type": "Place",
+      name: "Edinburgh, Scotland, United Kingdom",
+    },
+    hasOccupation: [
+      {
+        "@type": "Occupation",
+        name: "AI Engineer",
+        occupationLocation: {
+          "@type": "City",
+          name: "Edinburgh, Scotland, United Kingdom",
+        },
+        skills:
+          "Machine Learning, Deep Learning, NLP, Large Language Models, LLMOps, Computer Vision, Python, PyTorch",
+      },
+      {
+        "@type": "Occupation",
+        name: "MLOps Engineer",
+        occupationLocation: {
+          "@type": "City",
+          name: "Edinburgh, Scotland, United Kingdom",
+        },
+        skills:
+          "MLOps, LLMOps, Azure, Docker, CI/CD, serverless, model deployment, monitoring",
+      },
+    ],
     alumniOf: [
       {
         "@type": "CollegeOrUniversity",
@@ -99,10 +136,19 @@ export function PersonJsonLd() {
     ],
   };
 
+  const profilePage = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": "https://www.vaikunthguruswamy.uk/#profilepage",
+    url: "https://www.vaikunthguruswamy.uk",
+    name: "Vaikunth Guruswamy | AI Engineer & MLOps Engineer in Edinburgh",
+    mainEntity: jsonLd,
+  };
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePage) }}
     />
   );
 }

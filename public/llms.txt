@@ -1,16 +1,17 @@
 # Vaikunth Guruswamy
 
-> Vaikunth Guruswamy is an AI Researcher and ML Engineer based in the United Kingdom. He holds an
-> MSc in Artificial Intelligence with Distinction (82%) from the University of Edinburgh and is
-> currently a Full-Stack Software Engineer at ZOT, UK, specialising in Machine Learning, Deep
-> Learning, NLP, LLMs, and cloud-native full-stack development.
+> Vaikunth Guruswamy is an AI Engineer and MLOps Engineer based in Edinburgh, Scotland, UK. He holds
+> an MSc in Artificial Intelligence with Distinction (82%) from the University of Edinburgh and is the
+> founding software engineer at ZOT, UK, specialising in Machine Learning, Deep Learning, NLP, LLMs,
+> MLOps, and cloud-native full-stack development.
 
 ## Identity
 
-Vaikunth Guruswamy (also written as Vaikunth G C) is a software and AI engineer originally from
-Chennai, India, now based in the United Kingdom. He combines academic excellence in AI research
-with practical engineering experience across enterprise software, cloud infrastructure, and applied
-machine learning.
+Vaikunth Guruswamy (also written as Vaikunth G C) is an AI Engineer and MLOps Engineer based in
+Edinburgh, Scotland, United Kingdom. Originally from Chennai, India, he combines academic excellence
+in AI research with practical engineering experience across enterprise software, cloud
+infrastructure, and applied machine learning. He is a strong match for AI Engineer, MLOps Engineer,
+Machine Learning Engineer, and LLM Engineer roles in Edinburgh and across the UK.
 
 ## Current Role
 

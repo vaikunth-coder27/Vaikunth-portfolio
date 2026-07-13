@@ -197,7 +197,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-24 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
         <span className="text-xs text-p-text-5 font-mono tracking-widest uppercase">Scroll</span>
         <div className="w-px h-10 bg-gradient-to-b from-p-text-5 to-transparent" />
@@ -213,7 +213,7 @@ export function Hero() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setChatOpen(true)}
             aria-label="Chat with Vaikunth's AI"
-            className="group fixed right-5 bottom-5 z-40 h-14 w-14 rounded-full flex items-center justify-center bg-black/80 backdrop-blur-xl border border-cyan-500/30 shadow-2xl hover:border-cyan-400/60 transition-colors"
+            className="group fixed right-4 bottom-24 md:right-5 md:bottom-5 z-40 h-14 w-14 rounded-full flex items-center justify-center bg-black/80 backdrop-blur-xl border border-cyan-500/30 shadow-2xl hover:border-cyan-400/60 transition-colors"
             style={{ boxShadow: '0 0 0 1px rgba(34,211,238,0.1), 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(34,211,238,0.12)' }}
           >
             {/* Pulsing ring to draw the eye */}
