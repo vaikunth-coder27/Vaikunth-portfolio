@@ -1,11 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SplineScene } from '@/components/ui/splite'
 import { Spotlight } from '@/components/ui/spotlight'
 import { ChatWidget } from '@/components/ui/chat-widget'
 import { MessageCircle } from 'lucide-react'
+
+const CHAT_LOGO_SRC = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/chat-logo.png`
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -16,6 +18,16 @@ const fadeUp = (delay = 0) => ({
 export function Hero() {
   const [chatOpen, setChatOpen] = useState(false)
   const [tooltipVisible, setTooltipVisible] = useState(true)
+  // Floating launcher appears once the visitor scrolls past the hero, so the
+  // chat stays discoverable anywhere on the page.
+  const [launcherVisible, setLauncherVisible] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setLauncherVisible(window.scrollY > 480)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const handleRobotClick = () => {
     setTooltipVisible(false)
@@ -190,6 +202,34 @@ export function Hero() {
         <span className="text-xs text-p-text-5 font-mono tracking-widest uppercase">Scroll</span>
         <div className="w-px h-10 bg-gradient-to-b from-p-text-5 to-transparent" />
       </motion.div>
+
+      {/* Floating chat launcher — fixed, revealed on scroll, hidden while open */}
+      <AnimatePresence>
+        {launcherVisible && !chatOpen && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.6, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.6, y: 20 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            onClick={() => setChatOpen(true)}
+            aria-label="Chat with Vaikunth's AI"
+            className="group fixed right-5 bottom-5 z-40 h-14 w-14 rounded-full flex items-center justify-center bg-black/80 backdrop-blur-xl border border-cyan-500/30 shadow-2xl hover:border-cyan-400/60 transition-colors"
+            style={{ boxShadow: '0 0 0 1px rgba(34,211,238,0.1), 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(34,211,238,0.12)' }}
+          >
+            {/* Pulsing ring to draw the eye */}
+            <span className="absolute inset-0 rounded-full border border-cyan-400/30 animate-ping opacity-40" />
+            {/* Online dot */}
+            <span className="absolute top-0.5 right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-black" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={CHAT_LOGO_SRC}
+              alt=""
+              aria-hidden="true"
+              className="w-9 h-9 object-contain transition-transform group-hover:scale-110"
+            />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Chat widget */}
       <ChatWidget isOpen={chatOpen} onClose={() => setChatOpen(false)} />

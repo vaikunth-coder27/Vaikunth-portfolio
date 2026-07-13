@@ -19,12 +19,8 @@ export const toolSchemas = [
     type: 'function' as const,
     function: {
       name: 'get_experience',
-      description: "Vaikunth's work experience (ZOT roles, Amazon dissertation). Optional company filter.",
-      parameters: {
-        type: 'object',
-        properties: { company: { type: 'string', description: "Optional company, e.g. 'ZOT' or 'Amazon'." } },
-        required: [],
-      },
+      description: "Vaikunth's full work experience (ZOT roles, Amazon dissertation).",
+      parameters: { type: 'object', properties: {}, required: [] },
     },
   },
   {
@@ -39,12 +35,8 @@ export const toolSchemas = [
     type: 'function' as const,
     function: {
       name: 'get_projects',
-      description: "Vaikunth's 15 projects. Optional category: nlp | cv | ml | embedded | ethics.",
-      parameters: {
-        type: 'object',
-        properties: { category: { type: 'string', description: 'Optional: nlp | cv | ml | embedded | ethics.' } },
-        required: [],
-      },
+      description: "Vaikunth's 15 projects across NLP, computer vision, ML, embedded, and AI ethics.",
+      parameters: { type: 'object', properties: {}, required: [] },
     },
   },
   {
@@ -75,16 +67,20 @@ export const toolSchemas = [
     type: 'function' as const,
     function: {
       name: 'send_notification',
-      description: "Email Vaikunth a message from the visitor. First collect their name, reply email, and message, then call.",
+      description:
+        "Email Vaikunth that a visitor wants to connect. First collect their name and reply email, then ask if they'd like to add a note; only then call. The full chat transcript is attached automatically.",
       parameters: {
         type: 'object',
         properties: {
           visitor_name: { type: 'string', description: "Visitor's name." },
           visitor_email: { type: 'string', description: "Visitor's reply email." },
-          message: { type: 'string', description: 'The message for Vaikunth.' },
+          message: {
+            type: 'string',
+            description: "Optional note the visitor wants to add. Omit or leave empty if they don't want to add one.",
+          },
           subject: { type: 'string', description: 'Optional subject.' },
         },
-        required: ['visitor_name', 'visitor_email', 'message'],
+        required: ['visitor_name', 'visitor_email'],
       },
     },
   },
@@ -112,6 +108,8 @@ const categoryAliases: Record<string, string> = {
 }
 
 export function runTool(name: string, args: ToolArgs = {}): unknown {
+  // The model can pass `null` explicitly, which bypasses the default — coalesce.
+  args = args ?? {}
   switch (name) {
     case 'get_overview':
       return {
@@ -170,6 +168,7 @@ export async function executeTool(
   args: ToolArgs = {},
   meta: NotifyMeta = {},
 ): Promise<unknown> {
+  args = args ?? {}
   if (name === 'send_notification') {
     return sendNotification(
       {
