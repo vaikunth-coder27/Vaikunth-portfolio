@@ -2,8 +2,26 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Bot } from 'lucide-react'
+import { X } from 'lucide-react'
 import ChatInput from './chat-input'
+import { randomThinking } from '@/lib/ai/thinking'
+
+// Served from /public. BASE stays '' on the root domain; matches the pattern
+// used elsewhere for images so it works under a basePath too.
+const LOGO_SRC = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/chat-logo.png`
+
+// Small reusable avatar showing Vaikunth's chat logo.
+function BotAvatar({ size = 24, className = '' }: { size?: number; className?: string }) {
+  return (
+    <span
+      className={`inline-flex items-center justify-center rounded-full bg-cyan-500/15 border border-cyan-500/30 overflow-hidden flex-shrink-0 ${className}`}
+      style={{ width: size, height: size }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={LOGO_SRC} alt="" aria-hidden="true" className="w-full h-full object-contain p-0.5" />
+    </span>
+  )
+}
 
 interface Message {
   role: 'user' | 'assistant'
@@ -18,6 +36,14 @@ interface ChatWidgetProps {
 // Cloudflare Turnstile — public site key (safe to expose; appears in page HTML).
 const TURNSTILE_SITE_KEY =
   process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAD0m_xLzH44Kmjx5'
+
+// The sitekey isn't whitelisted for localhost, so the widget errors (110200) in
+// dev. Skip rendering/waiting for it locally — the API also disables the check
+// there via TURNSTILE_ENABLED=false. Production is unaffected.
+function isLocalHost(): boolean {
+  if (typeof window === 'undefined') return false
+  return /^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\]|::1)$/.test(window.location.hostname)
+}
 
 type TurnstileAPI = {
   render: (el: HTMLElement, opts: Record<string, unknown>) => string
@@ -38,31 +64,14 @@ const INITIAL_MESSAGE: Message = {
   content: "Hey there! 👋 Welcome — I'm here on Vaikunth's behalf, happy to chat. What brings you by today? Curious what you're working on, and I'd love to point you to the parts of his work you'd find most interesting.",
 }
 
-// Filler phrases shown during longer waits so paced/throttled responses feel
-// natural rather than stalled.
-const THINKING_PHRASES = [
-  'Thinking…',
-  'One sec…',
-  'Pulling that together…',
-  'Let me check that…',
-  'Almost there…',
-]
-
 function TypingIndicator() {
+  // Pick a fresh random phrase on mount, then keep rotating through new random
+  // ones so a longer (paced/throttled) wait never feels stalled or repetitive.
   const [phrase, setPhrase] = useState<string | null>(null)
 
   useEffect(() => {
-    // Only surface filler text if the wait runs a little long; quick replies
-    // just show the dots.
-    let i = 0
-    const start = setTimeout(() => {
-      setPhrase(THINKING_PHRASES[0])
-      i = 1
-    }, 1600)
-    const rotate = setInterval(() => {
-      setPhrase(THINKING_PHRASES[i % THINKING_PHRASES.length])
-      i += 1
-    }, 2400)
+    const start = setTimeout(() => setPhrase(randomThinking()), 600)
+    const rotate = setInterval(() => setPhrase(randomThinking()), 2000)
     return () => {
       clearTimeout(start)
       clearInterval(rotate)
@@ -71,9 +80,7 @@ function TypingIndicator() {
 
   return (
     <div className="flex items-end gap-2 mb-3">
-      <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center flex-shrink-0">
-        <Bot size={12} className="text-cyan-400" />
-      </div>
+      <BotAvatar size={24} />
       <div className="bg-white/5 border border-white/10 rounded-2xl rounded-bl-sm px-4 py-3">
         <div className="flex gap-2 items-center h-4">
           <div className="flex gap-1 items-center">
@@ -93,6 +100,9 @@ function TypingIndicator() {
 export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE])
   const [isLoading, setIsLoading] = useState(false)
+  // Only reveal the Turnstile widget when an interactive challenge is actually
+  // required; otherwise it verifies invisibly and stays hidden.
+  const [challengeActive, setChallengeActive] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Stable per-visit session id (persists across reloads within the tab) so the
@@ -119,7 +129,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
   const verifiedRef = useRef(false)
 
   useEffect(() => {
-    if (!isOpen) return
+    if (!isOpen || isLocalHost()) return
     let cancelled = false
 
     const renderWidget = () => {
@@ -129,13 +139,17 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
         appearance: 'interaction-only', // invisible unless a challenge is truly needed
         callback: (token: string) => {
           turnstileTokenRef.current = token
+          setChallengeActive(false)
         },
+        'before-interactive-callback': () => setChallengeActive(true),
+        'after-interactive-callback': () => setChallengeActive(false),
         'expired-callback': () => {
           turnstileTokenRef.current = ''
           if (turnstileWidgetId.current) window.turnstile?.reset(turnstileWidgetId.current)
         },
         'error-callback': () => {
           turnstileTokenRef.current = ''
+          setChallengeActive(false)
         },
       })
     }
@@ -174,7 +188,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
     scrollToBottom()
   }, [messages, isLoading, scrollToBottom])
 
-  const handleSubmit = useCallback(async (content: string) => {
+  const handleSubmit = useCallback(async (content: string, tool?: string) => {
     const userMessage: Message = { role: 'user', content }
     const updatedMessages = [...messages, userMessage]
 
@@ -183,9 +197,10 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
 
     try {
       // Until this session is verified, attach a Turnstile token. If it isn't
-      // ready yet (user sent very fast), wait briefly for it.
+      // ready yet (user sent very fast), wait briefly for it. Skipped on
+      // localhost where the widget is disabled.
       let token = ''
-      if (!verifiedRef.current) {
+      if (!verifiedRef.current && !isLocalHost()) {
         token = turnstileTokenRef.current
         for (let i = 0; i < 15 && !token; i++) {
           await new Promise(r => setTimeout(r, 200))
@@ -199,6 +214,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
         body: JSON.stringify({
           sessionId: sessionIdRef.current,
           messages: updatedMessages.map(m => ({ role: m.role, content: m.content })),
+          ...(tool ? { forceTool: tool } : {}),
           ...(token ? { turnstileToken: token } : {}),
         }),
       })
@@ -248,9 +264,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
           >
             {/* Header */}
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/8 flex-shrink-0">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500/30 to-purple-500/30 border border-cyan-500/30 flex items-center justify-center">
-                <Bot size={16} className="text-cyan-400" />
-              </div>
+              <BotAvatar size={32} />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white leading-none">Vaikunth&apos;s AI</p>
                 <p className="text-xs text-emerald-400 mt-0.5 flex items-center gap-1">
@@ -275,11 +289,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
                   key={i}
                   className={`flex items-end gap-2 mb-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
                 >
-                  {msg.role === 'assistant' && (
-                    <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center flex-shrink-0 mb-0.5">
-                      <Bot size={12} className="text-cyan-400" />
-                    </div>
-                  )}
+                  {msg.role === 'assistant' && <BotAvatar size={24} className="mb-0.5" />}
                   <div
                     className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       msg.role === 'user'
@@ -298,8 +308,16 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
 
             {/* Input */}
             <div className="px-3 pb-3 pt-2 flex-shrink-0 border-t border-white/5">
-              {/* Cloudflare Turnstile — invisible unless a challenge is needed */}
-              <div ref={turnstileBoxRef} className="flex justify-center [&:not(:empty)]:mb-2" />
+              {/* Cloudflare Turnstile — kept in the DOM so it can verify invisibly,
+                  but visually collapsed unless an interactive challenge is required. */}
+              <div
+                ref={turnstileBoxRef}
+                className={
+                  challengeActive
+                    ? 'flex justify-center mb-2'
+                    : 'h-0 overflow-hidden opacity-0 pointer-events-none'
+                }
+              />
               <ChatInput
                 placeholder="Ask me anything..."
                 onSubmit={handleSubmit}

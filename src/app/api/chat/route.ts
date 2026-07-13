@@ -1,6 +1,7 @@
 import { after } from 'next/server'
 import { SYSTEM_PROMPT, FALLBACKS } from '@/lib/ai/persona'
 import { toolSchemas, executeTool } from '@/lib/ai/tools'
+import { FORCEABLE_TOOLS } from '@/lib/ai/commands'
 import { precheckInput, detectInjection, guardOutput, CANNED, MAX_USER_CHARS, capWords } from '@/lib/ai/guardrails'
 import {
   buildContext,
@@ -24,6 +25,40 @@ const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const MODEL = process.env.GROQ_MODEL || 'llama-3.1-8b-instant'
 const MAX_TOOL_ROUNDS = 3
 
+// The small model sometimes narrates intent ("Let me check what he's shared…")
+// and returns it as a final answer WITHOUT calling a tool — stranding the user.
+// When we see this on a turn that pulled no tool data, we nudge it once with
+// tool_choice 'required' so it actually fetches the facts, then answers.
+const DEFERRAL_RE =
+  /\b(let me|i['’]?ll|i will|let['’]?s|allow me to|give me a)\s+\w*\s*(check|look|pull|find|dig|grab|fetch|gather|see|retriev|share|list)|\bone\s+(sec|second|moment)\b|\bhang on\b|\bhold on\b|\bchecking\b/i
+
+function looksLikeDeferral(text: string | null | undefined): boolean {
+  const t = (text ?? '').trim()
+  // Empty content with no tool call is also a dead-end worth nudging.
+  return t.length === 0 || DEFERRAL_RE.test(t)
+}
+
+// Map a user's question to the most relevant READ-ONLY tool, so a deferral can
+// be resolved by pinning that specific tool. We never infer send_notification —
+// pinning a side-effecting tool from a guess could fire a spurious email.
+function inferReadTool(text: string): string {
+  const t = text.toLowerCase()
+  if (/\b(projects?|portfolio|built|build|apps?|demos?|repos?)\b/.test(t)) return 'get_projects'
+  if (/\b(experiences?|jobs?|roles?|work(ed|ing)?|compan(y|ies)|career|intern(ship)?|amazon|zot|dissertation)\b/.test(t))
+    return 'get_experience'
+  if (/\b(skills?|tech|technolog\w*|stack|languages?|frameworks?|tools?|proficien\w*)\b/.test(t)) return 'get_skills'
+  if (/\b(education|degrees?|stud(y|ies|ied)|universit\w*|college|school|masters?|bachelor\w*|grades?|gpa|courses?|coursework)\b/.test(t))
+    return 'get_education'
+  if (/\b(certs?|certificates?|certification\w*|credentials?)\b/.test(t)) return 'get_certifications'
+  if (/\b(contacts?|reach|emails?|hir(e|ing)|linkedin|github|connect|get in touch)\b/.test(t)) return 'get_contact'
+  return 'get_overview'
+}
+
+// Injected once, after tool results, to keep the small model from inventing
+// names/facts when it summarises a larger payload (e.g. the projects list).
+const GROUNDING_REMINDER =
+  "Now answer the visitor's question in your warm, natural style, using ONLY the tool data above. Be specific: name the actual items from that data (real project titles, roles, skills) — a few concrete highlights, not vague generalities. Never invent names, libraries, numbers, or facts, and never describe this chat or the MCP server as one of his projects."
+
 // Progressive per-session pacing: message 1 is instant; each later message in the
 // same chat is delayed a little more (step per turn, capped) to smooth token use.
 const SESSION_DELAY_STEP_MS = Number(process.env.CHAT_DELAY_STEP_MS || 450)
@@ -46,7 +81,17 @@ type GroqResult =
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-async function callGroq(apiKey: string, messages: ChatMessage[], withTools: boolean): Promise<GroqResult> {
+// OpenAI/Groq tool_choice: let the model decide ('auto'), require *some* tool
+// ('required'), or pin a specific function.
+type ToolChoice = 'auto' | 'required' | { type: 'function'; function: { name: string } }
+
+async function callGroq(
+  apiKey: string,
+  messages: ChatMessage[],
+  withTools: boolean,
+  toolChoice: ToolChoice = 'auto',
+  temperature = 0.7,
+): Promise<GroqResult> {
   // Proactive TPM pacing: estimate this request's size (input + tool schemas +
   // room for the reply) and wait if we're near the per-minute cap.
   const estTokens =
@@ -63,8 +108,8 @@ async function callGroq(apiKey: string, messages: ChatMessage[], withTools: bool
       model: MODEL,
       messages,
       max_tokens: 400,
-      temperature: 0.7,
-      ...(withTools ? { tools: toolSchemas, tool_choice: 'auto' } : {}),
+      temperature,
+      ...(withTools ? { tools: toolSchemas, tool_choice: toolChoice } : {}),
     }),
   })
 
@@ -93,11 +138,16 @@ async function callGroq(apiKey: string, messages: ChatMessage[], withTools: bool
 
 export async function POST(req: Request) {
   try {
-    const { messages: incoming, sessionId: rawSessionId, turnstileToken } = await req.json()
+    const { messages: incoming, sessionId: rawSessionId, turnstileToken, forceTool } = await req.json()
 
     if (!Array.isArray(incoming)) {
       return Response.json({ error: 'Invalid request' }, { status: 400 })
     }
+
+    // A slash command may request a specific tool; only honour read-only tools
+    // from the vetted allow-list (never let the client force side-effecting ones).
+    const forcedTool =
+      typeof forceTool === 'string' && FORCEABLE_TOOLS.includes(forceTool) ? forceTool : null
 
     const apiKey = process.env.GROQ_API_KEY
     if (!apiKey) {
@@ -150,6 +200,13 @@ export async function POST(req: Request) {
 
     const lastUser = [...history].reverse().find((m) => m.role === 'user')?.content ?? ''
 
+    // Pre-formatted session transcript, attached to any email the visitor sends
+    // (send_notification) so Vaikunth sees the full context of the chat.
+    const transcript = history
+      .map((m) => `${m.role === 'user' ? 'Visitor' : 'Assistant'}: ${m.content}`)
+      .join('\n\n')
+    const toolMeta = { ip, transcript }
+
     // Defer session logging until after the response is sent.
     const log = (assistantMessage: string, extra: Partial<LogInput> = {}) => {
       after(() =>
@@ -195,11 +252,43 @@ export async function POST(req: Request) {
     const convo: ChatMessage[] = [...ctx.messages]
     const tokensIn = approxTokens(ctx.messages.map((m) => m.content).join('\n'))
     const collectedToolCalls: string[] = []
+    let groundingAdded = false
+    let seq = 0
+
+    // Run a read-only tool ourselves and splice its result into the convo as a
+    // proper assistant→tool pair, then a grounding reminder. This bypasses the
+    // small model's flaky forced-tool-call generation (it often emits malformed
+    // calls for parameterised tools → tool_use_failed → blind hallucination).
+    const injectTool = async (name: string, assistantContent = '') => {
+      const id = `call_${seq++}`
+      const result = await executeTool(name, {}, toolMeta)
+      convo.push({
+        role: 'assistant',
+        content: assistantContent,
+        tool_calls: [{ id, type: 'function', function: { name, arguments: '{}' } }],
+      })
+      convo.push({ role: 'tool', tool_call_id: id, content: JSON.stringify(result) })
+      if (!groundingAdded) {
+        convo.push({ role: 'system', content: GROUNDING_REMINDER })
+        groundingAdded = true
+      }
+      collectedToolCalls.push(name)
+    }
+
+    // Slash command → run its tool up front so the answer is always grounded.
+    if (forcedTool) await injectTool(forcedTool)
 
     // Tool-calling loop: let the model fetch grounded facts, then answer.
     for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
       const isLastRound = round === MAX_TOOL_ROUNDS - 1
-      let resp = await callGroq(apiKey, convo, !isLastRound)
+      const haveToolData = collectedToolCalls.length > 0
+      // Allow ONE model-driven tool-fetch round; once we hold tool data, answer
+      // WITHOUT tools so the model must speak from the facts (with tools still
+      // offered it tends to wander off and invent). Answers from data also run
+      // at a lower temperature to further discourage invention.
+      const withTools = !isLastRound && !haveToolData
+      const temp = haveToolData ? 0.3 : 0.7
+      let resp = await callGroq(apiKey, convo, withTools, 'auto', temp)
 
       // Rate limited (free-tier TPM/RPM): auto-retry once if the wait is short,
       // otherwise return a friendly "busy" message rather than a hard error.
@@ -207,7 +296,7 @@ export async function POST(req: Request) {
         const waitMs = resp.retryAfterMs ?? 0
         if (waitMs > 0 && waitMs <= 3500) {
           await sleep(waitMs + 250)
-          resp = await callGroq(apiKey, convo, !isLastRound)
+          resp = await callGroq(apiKey, convo, withTools, 'auto', temp)
         }
         if (!resp.ok && resp.status === 429) {
           log(FALLBACKS.busy, { guardrail: 'rate_limited', tokensIn })
@@ -215,11 +304,16 @@ export async function POST(req: Request) {
         }
       }
 
-      // Recover from a malformed/failed tool call: retry once WITHOUT tools so the
-      // model produces a clean plain-text reply; salvage its prose if even that fails.
+      // Recover from a malformed/failed tool call. If we don't have grounded data
+      // yet, fetch the inferred tool ourselves and answer from it next round;
+      // otherwise retry once without tools and salvage the prose if needed.
       if (!resp.ok) {
         if (resp.code === 'tool_use_failed') {
-          const retry = await callGroq(apiKey, convo, false)
+          if (!haveToolData && !isLastRound) {
+            await injectTool(inferReadTool(lastUser))
+            continue
+          }
+          const retry = await callGroq(apiKey, convo, false, 'auto', temp)
           if (retry.ok) {
             resp = retry
           } else {
@@ -245,18 +339,34 @@ export async function POST(req: Request) {
         for (const tc of toolCalls) {
           let args: Record<string, unknown> = {}
           try {
-            args = tc.function.arguments ? JSON.parse(tc.function.arguments) : {}
+            const parsed = tc.function.arguments ? JSON.parse(tc.function.arguments) : {}
+            // The model sometimes emits `null` / a non-object here — coalesce it.
+            if (parsed && typeof parsed === 'object') args = parsed as Record<string, unknown>
           } catch {
             args = {}
           }
           collectedToolCalls.push(tc.function.name)
-          const result = await executeTool(tc.function.name, args, { ip })
+          const result = await executeTool(tc.function.name, args, toolMeta)
           convo.push({
             role: 'tool',
             tool_call_id: tc.id,
             content: JSON.stringify(result),
           })
         }
+        // Remind the model to ground its next answer strictly in these results.
+        if (!groundingAdded) {
+          convo.push({ role: 'system', content: GROUNDING_REMINDER })
+          groundingAdded = true
+        }
+        continue
+      }
+
+      // Deferral guard: the model promised to look something up but returned no
+      // tool call. Fetch the inferred read-only tool ourselves so the visitor
+      // gets real facts instead of a dangling "let me check…", then answer next
+      // round. Only while a tool round is still available.
+      if (collectedToolCalls.length === 0 && !isLastRound && looksLikeDeferral(msg.content)) {
+        await injectTool(inferReadTool(lastUser), msg.content ?? '')
         continue
       }
 

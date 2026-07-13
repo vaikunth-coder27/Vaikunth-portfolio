@@ -14,7 +14,9 @@ export type NotifyInput = {
   subject?: string
 }
 
-export type NotifyMeta = { ip?: string }
+// `transcript` is the full session chat, pre-formatted by the caller, so the
+// email carries the surrounding conversation for context.
+export type NotifyMeta = { ip?: string; transcript?: string }
 
 export type NotifyResult = {
   ok: boolean
@@ -58,15 +60,16 @@ export async function sendNotification(
 ): Promise<NotifyResult> {
   const name = clean(input.visitor_name, MAX_NAME)
   const email = clean(input.visitor_email, 200)
+  // The note is optional — the visitor may just want to say hello / connect.
   const message = String(input.message ?? '').trim().slice(0, MAX_MESSAGE)
 
-  // Validation.
-  if (!name || !email || !message) {
+  // Validation — only name + email are required; the note is optional.
+  if (!name || !email) {
     return {
       ok: false,
       status: 'invalid',
       message:
-        "I still need a few details before I can pass this along — could you share your name, email, and the message you'd like to send Vaikunth?",
+        "I still need a couple of details before I can pass this along — could you share your name and email so Vaikunth can reply?",
     }
   }
   if (!EMAIL_RE.test(email)) {
@@ -108,6 +111,14 @@ export async function sendNotification(
   const subject = clean(input.subject, 160) || `New portfolio message from ${name}`
   const sentAt = new Date().toISOString()
 
+  // Full session transcript for context (already formatted by the caller).
+  const transcript = (meta.transcript ?? '').trim()
+  const transcriptBlock = transcript
+    ? `\n────────────────────────────────────────\nFull chat transcript for this session:\n\n${transcript}\n`
+    : ''
+
+  const noteBlock = message ? message : '(No note left — the visitor just wanted to get in touch.)'
+
   try {
     const resend = new Resend(apiKey)
     const { error } = await resend.emails.send({
@@ -121,9 +132,9 @@ From:    ${name}
 Email:   ${email}
 Sent:    ${sentAt}
 
-Message:
-${message}
-
+Note:
+${noteBlock}
+${transcriptBlock}
 — Sent by the portfolio chat assistant (reply directly to reach ${name}).`,
     })
 
