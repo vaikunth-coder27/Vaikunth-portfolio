@@ -49,6 +49,11 @@ SendButton.displayName = 'SendButton'
 
 const MENU_OPTIONS: MenuOption[] = ['About', 'Projects', 'Skills', 'Experience']
 
+// Keep in sync with MAX_USER_WORDS in src/lib/ai/guardrails.ts
+const MAX_INPUT_WORDS = 50
+
+const countWords = (s: string) => (s.trim() ? s.trim().split(/\s+/).filter(Boolean).length : 0)
+
 export default function ChatInput({
   placeholder = 'Ask me anything...',
   onSubmit,
@@ -84,10 +89,13 @@ export default function ChatInput({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  const wordCount = countWords(value)
+  const overLimit = wordCount > MAX_INPUT_WORDS
+
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault()
-      if (value.trim() && !disabled) {
+      if (value.trim() && !disabled && countWords(value) <= MAX_INPUT_WORDS) {
         onSubmit?.(value.trim())
         setValue('')
       }
@@ -129,7 +137,7 @@ export default function ChatInput({
     }
   }, [ripples.length])
 
-  const isSubmitDisabled = disabled || !value.trim()
+  const isSubmitDisabled = disabled || !value.trim() || overLimit
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
@@ -213,8 +221,22 @@ export default function ChatInput({
           />
         </div>
 
+        {/* Word counter — always visible, bottom-right */}
+        <span
+          className={`absolute bottom-1.5 right-12 text-[10px] font-mono z-20 pointer-events-none transition-colors ${
+            overLimit ? 'text-red-400' : wordCount >= 40 ? 'text-amber-400' : 'text-neutral-500'
+          }`}
+        >
+          {wordCount}/{MAX_INPUT_WORDS}
+        </span>
+
         <SendButton isDisabled={isSubmitDisabled} />
       </div>
+      {overLimit && (
+        <p className="mt-1.5 px-2 text-[11px] text-red-400/90">
+          Please keep it under {MAX_INPUT_WORDS} words — shorter messages get quicker, sharper answers.
+        </p>
+      )}
     </form>
   )
 }
